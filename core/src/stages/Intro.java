@@ -11,10 +11,7 @@ public class Intro extends TextStages{
 
     public Intro() {
         this(new ChoiceButton[] { 
-        	new ChoiceButton ("You walk away"),
-        	new ChoiceButton ("[int 5] You investigate the scene"),
-        	new ChoiceButton ("[chr 10] You bribe the guard for information"),
-        	new ChoiceButton ("[str 12] You threaten the guard for information")
+        	new ChoiceButton ("You walk forwards"),
         });
     }
     
@@ -25,16 +22,13 @@ public class Intro extends TextStages{
 			return;
 		switch (index) {
 			case 0:
-				Main.location = "hamlet";
-				break;
-			case 1:
-				drawText ("You begin investigating the scene for clues.");
-				break;
-			case 2:
-				drawText ("You bribe the guard for information regarding the incident.");
-				break;
-			case 3:
-				drawText ("You threaten the guard for information regarding the incident.");
+				if (drawText("You walk forwards, stumbling through the darkness."))
+					try {
+						Thread.sleep(2500);
+						Main.location = "hamlet";
+					} catch(InterruptedException e) {
+					    System.out.println("Thread got interrupted! >:(");
+					}
 				break;
 			default:
 				break;

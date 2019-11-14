@@ -14,7 +14,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import stages.Hamlet;
+import hamlet.Hamlet;
+import hamlet.HamletTavern;
+import hamlet.LonelyPatron;
 import stages.Intro;
 import stages.TextStages;
 
@@ -37,6 +39,8 @@ public class Main extends ApplicationAdapter {
     CharacterCreation creation;
     Intro intro;
     Hamlet hamlet;
+    HamletTavern hamletTavern;
+    LonelyPatron lonelyPatron;
     
     Scanner textReader;
     String readText = "";
@@ -63,6 +67,8 @@ public class Main extends ApplicationAdapter {
 			creation = new CharacterCreation();
 		}
 		hamlet = new Hamlet();
+		hamletTavern = new HamletTavern();
+		lonelyPatron = new LonelyPatron();
 		
 		Gdx.input.setInputProcessor(creation.stage);
 	}
@@ -90,12 +96,22 @@ public class Main extends ApplicationAdapter {
         		break;
         	case "intro":
         		Gdx.input.setInputProcessor(intro.stage);
-        		intro.stage.draw();
         		intro.update();
+        		intro.stage.draw();
+        		intro.stage.act();
         		break;
         	case "hamlet":
         		Gdx.input.setInputProcessor(hamlet.stage);
         		hamlet.stage.draw();
+        		break;
+        	case "hamlet-tavern":
+        		Gdx.input.setInputProcessor(hamletTavern.stage);
+        		hamletTavern.update();
+        		hamletTavern.stage.draw();
+        		break;
+        	case "lonely-patron":
+        		Gdx.input.setInputProcessor(lonelyPatron.stage);
+        		lonelyPatron.stage.draw();
         		break;
         	default:
         		break;

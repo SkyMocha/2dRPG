@@ -26,10 +26,10 @@ public class ChoiceButton {
 	
 	int index;
     
-	ChoiceButton (final String text) {
+	public ChoiceButton (final String text) {
 		
 		generator.scaleForPixelHeight((int)Math.ceil(Main.SCREEN_HEIGHT));
-		parameter.size = (int)Math.ceil(25);
+		parameter.size = (int)Math.ceil(40);
 		
 		parameter.minFilter = TextureFilter.Nearest;
 		parameter.magFilter = TextureFilter.MipMapLinearNearest;
@@ -37,13 +37,12 @@ public class ChoiceButton {
 		textButtonStyle = new TextButtonStyle();
 		font = generator.generateFont(parameter);
 		
-		font.getData().setScale(2.5f, 2.5f);
 		textButtonStyle.font = font;
 		button = new TextButton(text, textButtonStyle);
 	}
 
 	// If the event requires a skill check, it sees whether you can pass it or not
-	boolean choice () {
+	public boolean choice () {
 		if (button.getText().toString().contains("]")) {
 			String prefix = button.getText().toString().split("]")[0].substring(1);
 			System.out.println(prefix);

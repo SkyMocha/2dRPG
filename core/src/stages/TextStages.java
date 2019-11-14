@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -13,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
@@ -29,18 +33,21 @@ public class TextStages {
     TextButtonStyle textButtonStyle;
     LabelStyle labelStyle;
     Label text;
+    ScrollPane scrollPane;
     
     Scanner textReader;
     String readText = "";
     
     float stringCompleteness = 1;
     float timeElapsed;
-    float textSpeed = 25f * 4;
+    float baseTextSpeed = 65f;
+    float textSpeed = baseTextSpeed;
     
     static int j;
-    static int pindex = 0;
+    protected static int pindex = 0;
+    static float y;
     
-    ChoiceButton[] choices;
+    protected ChoiceButton[] choices;
     
     boolean flag;
     boolean choosen;
@@ -52,7 +59,7 @@ public class TextStages {
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		
 		generator.scaleForPixelHeight((int)Math.ceil(Main.SCREEN_HEIGHT));
-		parameter.size = (int)Math.ceil(50);
+		parameter.size = (int)Math.ceil(40);
 		
 		parameter.minFilter = TextureFilter.Nearest;
 		parameter.magFilter = TextureFilter.MipMapLinearNearest;
@@ -65,8 +72,6 @@ public class TextStages {
 		textButtonStyle.font = font;
 		labelStyle.font = font;
 		
-		text = new Label ("", labelStyle);
-		
 		choices = tchoices;
 		
 		int i = 0;
@@ -74,17 +79,28 @@ public class TextStages {
 			choice.button.setX(Main.SCREEN_WIDTH, Align.bottomRight);
 			choice.button.setY(i);
 			stage.addActor(choice.button);
-			i += 70;
+			i += 50;
 		}
 		
-		FileHandle f = Gdx.files.internal(textFile + ".txt");
+		FileHandle f = Gdx.files.internal("text/" + textFile + ".txt");
 		textReader = new Scanner(f.read());
     	while (textReader.hasNext())
     		readText += textReader.nextLine() + "\n";
+    	
+    	text = new Label ("", labelStyle);
+		text.setY(i + 10, Align.bottomLeft);
+		text.setX(Align.bottomLeft);
+		text.setWidth(1880);
+		text.setWrap(true);
 		
 	}
 	
 	public void update () {
+		if (Gdx.input.isKeyPressed(Input.Keys.TAB))
+			textSpeed = baseTextSpeed * 6;
+		else
+			textSpeed = baseTextSpeed;
+		
 		if (stringCompleteness + 1 <= readText.length() && !flag)
 			drawText(readText);
 		else if (!flag) {
@@ -120,22 +136,21 @@ public class TextStages {
 		}
 	}
 	
-	public void drawText (String typeText) {	
-		
-		System.out.println (typeText);
-		
+	public boolean drawText (String typeText) {	
+				
 		stringCompleteness += textSpeed * Gdx.graphics.getDeltaTime();
 		
 		if (stringCompleteness > typeText.length())
-			return;
+			return true;
 		
-		text.remove();
+		text.setText(typeText.substring (0, (int)stringCompleteness));
+		text.invalidate();
+		text.pack();
+		text.layout();
 		
-		text = new Label (typeText.substring(0, (int)stringCompleteness + 1), labelStyle);
-		text.setX(10, Align.left);
-		text.setY(Main.SCREEN_HEIGHT - text.getHeight() - 20);
-	
 		stage.addActor(text);
+		
+		return false;
 		
 	}
 }

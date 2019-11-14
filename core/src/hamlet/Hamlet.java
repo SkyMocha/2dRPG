@@ -1,6 +1,9 @@
-package stages;
+package hamlet;
 
 import com.mygdx.game.Main;
+
+import stages.ChoiceButton;
+import stages.Town;
 
 public class Hamlet extends Town {
 	private Hamlet(ChoiceButton[] t) {
@@ -13,7 +16,8 @@ public class Hamlet extends Town {
         	new ChoiceButton ("Carpenters House"),
         	new ChoiceButton ("Blacksmiths House"),
         	new ChoiceButton ("Tavern"),
-        	new ChoiceButton ("Royal Keep")
+        	new ChoiceButton ("Royal Keep"),
+        	new ChoiceButton ("Town Square")
         });
     }
     
@@ -31,6 +35,9 @@ public class Hamlet extends Town {
 				break;
 			case 3:
 				Main.location = "hamlet-keep";
+				break;
+			case 4:
+				Main.location = "hamlet-square";
 				break;
 			default:
 				break;
