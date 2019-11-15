@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import hamlet.Hamlet;
 import hamlet.HamletTavern;
+import hamlet.IntroFight;
 import hamlet.LonelyPatron;
 import stages.Intro;
 import stages.TextStages;
@@ -41,6 +42,7 @@ public class Main extends ApplicationAdapter {
     Hamlet hamlet;
     HamletTavern hamletTavern;
     LonelyPatron lonelyPatron;
+    IntroFight introFight;
     
     Scanner textReader;
     String readText = "";
@@ -69,6 +71,7 @@ public class Main extends ApplicationAdapter {
 		hamlet = new Hamlet();
 		hamletTavern = new HamletTavern();
 		lonelyPatron = new LonelyPatron();
+		introFight = new IntroFight();
 		
 		Gdx.input.setInputProcessor(creation.stage);
 	}
@@ -112,6 +115,10 @@ public class Main extends ApplicationAdapter {
         	case "lonely-patron":
         		Gdx.input.setInputProcessor(lonelyPatron.stage);
         		lonelyPatron.stage.draw();
+        		break;
+        	case "tutorial-fight":
+        		Gdx.input.setInputProcessor(introFight.stage);
+        		introFight.stage.draw();
         		break;
         	default:
         		break;
