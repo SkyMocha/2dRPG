@@ -14,14 +14,49 @@ public class LonelyPatron extends NPC {
 	
 	public LonelyPatron() {
         this(new ChoiceButton[][] { 
+        	// currStep 0
         	{
+        		// Case 0
         		new ChoiceButton ("Hello."),
+        		// Case 1
                 new ChoiceButton ("[dex 3] Rob"),
+                // Case 2
                 new ChoiceButton ("Leave"),
         	},
+        	// currStep 1
         	{
-        		new ChoiceButton ("Three"),
-                new ChoiceButton ("Four"),
+        		// Case 3
+        		new ChoiceButton ("Repeat yourself."),
+        		// Case 4
+        		new ChoiceButton ("Tap him on the shoulder."),
+        		// Case 5
+                new ChoiceButton ("Leave"),
+        	},
+        	// currStep 2
+        	{
+        		// Case 6
+        		new ChoiceButton ("Hello."),
+        		// Case 7
+                new ChoiceButton ("Leave"),
+        	},
+        	// currStep 3
+        	{
+        		// Case 8
+        		new ChoiceButton ("Do you have any idea as to where we are?"),
+        		// Case 9
+                new ChoiceButton ("Leave"),
+        	},
+        	// currStep 4
+        	{
+        		// Case 10
+        		new ChoiceButton ("Sorry for disturbing you, do you have any idea as to where we are?"),
+        		// Case 111
+                new ChoiceButton ("Leave"),
+        	},
+        	// currStep 5
+        	{
+        		// Case 10
+        		new ChoiceButton ("Leave"),
         	},
       
         }, "lonely-patron");
@@ -32,19 +67,43 @@ public class LonelyPatron extends NPC {
 //			return;
 		switch (index) {
 			case 0:
-				changeStep (1);
+				changeStep(1);
 				break;
 			case 1:
-				changeStep (2);
+				changeStep(2);
 				break;
 			case 2:
-				Main.location = "hamlet";
+				decisionTree(-1);
 				break;
 			case 3:
-				Main.location = "hamlet";
+				changeStep(3);
+				break;
+			case 4:
+				changeStep(4);
+				break;
+			case 5:
+				decisionTree(-1);
+				break;
+			case 6:
+				changeStep (1);
+				break;
+			case 7:
+				decisionTree(-1);
+				break;
+			case 8:
+				changeStep (5);
+				break;
+			case 9:
+				decisionTree(-1);
+				break;
+			case 10:
+				changeStep (5);
+				break;
+			case 11:
+				decisionTree(-1);
 				break;
 			default:
-				System.out.println("BROKE");
+				Main.location = "hamlet";
 				break;
 		}
 	}

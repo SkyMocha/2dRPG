@@ -82,9 +82,21 @@ public class NPC {
 		for (ChoiceButton[] choiceList : tchoices) {
 			i = 0;
 			for (ChoiceButton choice : choiceList) {
+				// Sets button position
 				choice.button.setX(Main.SCREEN_WIDTH, Align.bottomRight);
 				choice.button.setY(i);
 				i += 50;
+				
+				// Adds button listener
+				choice.index = j;
+				choice.button.addListener(new ChangeListener() {
+					int index = j;
+					@Override
+					public void changed (ChangeEvent event, Actor actor) {
+						decisionTree (index);
+					}
+				});
+				j++;
 			}
 		}
 				
@@ -96,9 +108,11 @@ public class NPC {
     	
     	choices = tchoices;
     	
+    	
     	changeStep (0);
 	}
 	
+	// Defines the variables in both NPC types
 	private void define () {
 		stage = new Stage (Main.viewport);
 		
@@ -120,13 +134,14 @@ public class NPC {
 		labelStyle.font = font;
 		
 		text = new Label ("", labelStyle);
-		text.setY(i + 10, Align.bottomLeft);
-		text.setX(Align.bottomLeft);
+		text.setX(Align.topLeft);
+		text.setY(Main.SCREEN_HEIGHT, Align.topLeft);
 		text.setWidth(1880);
 		text.setWrap(true);
 		text.pack();
 	}
 	
+	// General structure of a decision tree for a conversation
 	public void decisionTree (int index) {
 		pindex = index;
 		if (!choices[currStep][index].choice())
@@ -141,6 +156,7 @@ public class NPC {
 		}
 	}
 	
+	// Changes the current step of dialogue
 	public void changeStep (int index) {
 		
 		if (index != 0)
@@ -149,24 +165,24 @@ public class NPC {
 		
 		currStep = index;
 		
+		// Formats the current text
 		currText = readText.split("(break)")[index];
-		    	
+		currText = currText.replace("(", "").replace(")", "");
+		currText = currText.replaceFirst(System.getProperty("line.separator"), "");
+		while (Character.isDigit(currText.charAt(0)))
+			currText = currText.substring(1);
+		
 		text.setText(currText);
+		
+		// Changes the y of the text so that longer peices of text still fit.
+		text.setY(Main.SCREEN_HEIGHT- text.getHeight() - 50, Align.topLeft);
 		
 		stage.addActor(text);
 		
-		for (ChoiceButton choice : choices[currStep]) {
-			choice.index = j;
-			choice.button.addListener(new ChangeListener() {
-				int index = j;
-				@Override
-				public void changed (ChangeEvent event, Actor actor) {
-					decisionTree (index);
-				}
-			});
-			j++;
+		System.out.println (choices);
+		
+		for (ChoiceButton choice : choices[currStep]) 
 			stage.addActor(choice.button);
-		}
 			
 	}
 	

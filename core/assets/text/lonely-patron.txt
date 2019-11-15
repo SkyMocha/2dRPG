@@ -1,5 +1,14 @@
-You approach the lonely patron, however he does not seem to take note of you.
+(0)You approach the lonely patron, however he does not seem to take note of you.
 (break)
-You introduce yourself to the lonely patron.
+(1)You introduce yourself to the lonely patron.
 (break)
-You steal the belongings of the lonely patron.
+(2)You steal the belongings of the lonely patron.
+(break)
+(3)Hello...
+(break)
+(4)You tap the lonely patron on the shoulder, 
+he slowly turns around to face you, 
+although he doesn't look you in the eyes.
+Hello...
+(break)
+(5) NOOOOOOOO THIS CANNOT BE

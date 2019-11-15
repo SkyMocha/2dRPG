@@ -35,13 +35,12 @@ public class TextStages {
     Label text;
     ScrollPane scrollPane;
     
-    Scanner textReader;
-    String readText = "";
+    Scanner textReader; // Reads a text file then adds it to readText
+    String readText = ""; // The text that will be in this readText
     
-    float stringCompleteness = 1;
-    float timeElapsed;
-    float baseTextSpeed = 65f;
-    float textSpeed = baseTextSpeed;
+    float stringCompleteness = 1; // How complete the String is in drawText
+    float baseTextSpeed = 65f; // The base text speed [modifiable]
+    float textSpeed = baseTextSpeed; // The actual text speed
     
     static int j;
     protected static int pindex = 0;
@@ -74,6 +73,7 @@ public class TextStages {
 		
 		choices = tchoices;
 		
+		// Adds the choice button
 		int i = 0;
 		for (ChoiceButton choice : choices) {
 			choice.button.setX(Main.SCREEN_WIDTH, Align.bottomRight);
@@ -82,6 +82,7 @@ public class TextStages {
 			i += 50;
 		}
 		
+		// Creates the readText variable based on what the dialogue file says
 		FileHandle f = Gdx.files.internal("text/" + textFile + ".txt");
 		textReader = new Scanner(f.read());
     	while (textReader.hasNext())
@@ -95,6 +96,7 @@ public class TextStages {
 		
 	}
 	
+	// Updates every frame; required since it uses a typewriter effect for text
 	public void update () {
 		if (Gdx.input.isKeyPressed(Input.Keys.TAB))
 			textSpeed = baseTextSpeed * 6;
@@ -136,6 +138,8 @@ public class TextStages {
 		}
 	}
 	
+	// Typewriter effect for text
+	// Returns true when complete
 	public boolean drawText (String typeText) {	
 				
 		stringCompleteness += textSpeed * Gdx.graphics.getDeltaTime();

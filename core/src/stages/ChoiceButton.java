@@ -45,7 +45,6 @@ public class ChoiceButton {
 	public boolean choice () {
 		if (button.getText().toString().contains("]")) {
 			String prefix = button.getText().toString().split("]")[0].substring(1);
-			System.out.println(prefix);
 			String stat = prefix.split(" ")[0];
 			int req = Integer.parseInt(prefix.split(" ")[1]);
 					
@@ -55,7 +54,6 @@ public class ChoiceButton {
 		return true;
 		
 	}
-	
 	boolean requirnments (String stat, int req) {
 		if (stat.equals ("str") && req < Player.strength)
 			return true;
