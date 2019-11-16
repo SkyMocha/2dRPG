@@ -7,6 +7,7 @@ import stages.ChoiceButton;
 
 public class Player extends Entity {
 		
+	public static int health;
 	public static int strength;
 	public static int dexterity;
 	public static int charisma;
@@ -24,12 +25,18 @@ public class Player extends Entity {
 		intelligence = avg;
 		wisdom = avg;
 		
+		health = 8;
+		
 		addAction (
 				"Fist",
 				5,
 				100,
 				-1
 			);
+	}
+	
+	public void incHealth () {
+		health += strength/3;
 	}
 	
 	public void addAction (String tname, int tpower, int taccuracy, int theal) {
