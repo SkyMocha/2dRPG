@@ -15,8 +15,12 @@ public class HamletTavern extends TextStages {
 
     public HamletTavern() {
         this(new ChoiceButton[] { 
-        	new ChoiceButton ("Talk to the lonely patron"),
-        	new ChoiceButton ("Interrupt the fight")
+        	new ChoiceButton ("Talk to the lonely patron."),
+        	new ChoiceButton ("Interrupt the fight."),
+        	new ChoiceButton ("[chr 15] Sit at the familiar, yet painful table."),
+        	new ChoiceButton ("[chr 12] Sit at the lonely, yet familiar table."),
+        	new ChoiceButton ("Sit at the lighthearted table."),
+        	new ChoiceButton ("Sit at the lonely table"),
         });
     }
     
@@ -28,8 +32,10 @@ public class HamletTavern extends TextStages {
 			case 0:
 				if (drawText("You begin talking to the lonely patron."))
 					try {
-						Thread.sleep(2500);
+						pindex = -1;
+						Thread.sleep(2000);
 						Main.location = "lonely-patron";
+						setText();
 					} catch(InterruptedException e) {
 					    System.out.println("Thread got interrupted! >:(");
 					}
@@ -37,8 +43,10 @@ public class HamletTavern extends TextStages {
 			case 1:
 				if (drawText("You step in to interrupt the fight."))
 					try {
-						Thread.sleep(2500);
+						pindex = -1;
+						Thread.sleep(2000);
 						Main.location = "tutorial-fight";
+						setText();
 					} catch(InterruptedException e) {
 					    System.out.println("Thread got interrupted! >:(");
 					}

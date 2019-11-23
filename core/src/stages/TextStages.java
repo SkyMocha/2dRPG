@@ -1,6 +1,5 @@
 package stages;
 
-import java.io.File;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
@@ -15,16 +14,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 import com.mygdx.game.Main;
-import com.mygdx.game.Player;
 
 public class TextStages {
 	public Stage stage;
@@ -51,7 +46,9 @@ public class TextStages {
     boolean flag;
     boolean choosen;
     
-	public TextStages (ChoiceButton[] tchoices, String textFile) {		
+    String textFile;
+    
+	public TextStages (ChoiceButton[] tchoices, String ttextFile) {		
 		stage = new Stage (Main.viewport);
 				
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/YeonSung-Regular.ttf"));
@@ -83,29 +80,34 @@ public class TextStages {
 		}
 		
 		// Creates the readText variable based on what the dialogue file says
-		FileHandle f = Gdx.files.internal("text/" + textFile + ".txt");
-		textReader = new Scanner(f.read());
-    	while (textReader.hasNext())
-    		readText += textReader.nextLine() + "\n";
-    	
+		textFile = ttextFile;
+		setText();
+		
     	text = new Label ("", labelStyle);
 		text.setY(i + 10, Align.bottomLeft);
 		text.setX(Align.bottomLeft);
 		text.setWidth(1880);
 		text.setWrap(true);
+		stage.addActor(text);
 		
 	}
 	
 	// Updates every frame; required since it uses a typewriter effect for text
-	public void update () {
+	public void update () {	 	
 		if (Gdx.input.isKeyPressed(Input.Keys.TAB))
 			textSpeed = baseTextSpeed * 6;
 		else
 			textSpeed = baseTextSpeed;
 		
-		if (stringCompleteness + 1 <= readText.length() && !flag)
+		// Checks to see if the text is completed, if not, then it continues drawing the text
+		if (Math.round(stringCompleteness) <= readText.length() && !flag)
 			drawText(readText);
+		
+		// Creates the action listeners for the buttons
 		else if (!flag) {
+			// Completes the text just in case
+			stringCompleteness = readText.length()-1;
+			drawText(readText);
 			for (j = 0; j < choices.length; j++) {
 				choices[j].index = j;
 				choices[j].button.addListener(new ChangeListener() {
@@ -113,7 +115,7 @@ public class TextStages {
 					@Override
 					public void changed (ChangeEvent event, Actor actor) {
 						decisionTree (index);
-						choosen = !choosen;
+						choosen = !choosen;															
 			    	}
 				});
 			}
@@ -147,14 +149,21 @@ public class TextStages {
 		if (stringCompleteness > typeText.length())
 			return true;
 		
-		text.setText(typeText.substring (0, (int)stringCompleteness));
+		text.setText(typeText.substring (0, (int)stringCompleteness + 1));
 		text.invalidate();
 		text.pack();
 		text.layout();
 		
-		stage.addActor(text);
-		
 		return false;
 		
+	}
+	
+	public void setText () {
+		readText = "";
+		FileHandle f = Gdx.files.internal("text/" + textFile + ".txt");
+		textReader = new Scanner(f.read());
+    	while (textReader.hasNext())
+    		readText += textReader.nextLine() + "\n";
+    	flag = false;
 	}
 }

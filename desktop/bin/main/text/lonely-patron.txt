@@ -2,13 +2,25 @@
 (break)
 (1)You introduce yourself to the lonely patron.
 (break)
-(2)You steal the belongings of the lonely patron.
+(2)You steal the belongings of the lonely patron, 
+yet he does not seem to notice.
+You sense a small feeling of dread,
+calmed only by the handful of coin you procured from him.
 (break)
-(3)Hello...
+(3)”Hello…”
 (break)
 (4)You tap the lonely patron on the shoulder, 
 he slowly turns around to face you, 
 although he doesn't look you in the eyes.
-Hello...
+“Hello…”
+His voice is soft, yet distant from the chaos of the tavern.
 (break)
-(5) NOOOOOOOO THIS CANNOT BE
+(5) We are all lost souls, looking for some place.
+The fact you ask this question, shows you need guidance
+through the dark path that lies ahead.
+Good luck in finding yourself.
+*He takes a swig from his mug*
+Sure know I need to.
+He gets up, and walks into the crowd.
+No matter how much you try to find him,
+He has disappeared.

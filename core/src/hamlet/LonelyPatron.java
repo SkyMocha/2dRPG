@@ -103,6 +103,7 @@ public class LonelyPatron extends NPC {
 				decisionTree(-1);
 				break;
 			default:
+				changeStep (0);
 				Main.location = "hamlet";
 				break;
 		}

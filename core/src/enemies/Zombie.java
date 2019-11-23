@@ -6,12 +6,16 @@ public class Zombie extends Entity{
 	public Zombie () {
 		name = "Zombie";
 		
-		strength = avg-2;
-		dexterity = avg-2;
+		repair = avg-2;
+		readiness = avg-2;
+		force = avg-2;
+		finesse = avg-2;
+		courage = avg-2;
 		charisma = avg-2;
 		intelligence = avg-2;
-		wisdom = avg-2;
+		ingenuity = avg-2;
 		
 		health = 3;
+		maxHealth = 3;
 	}
 }

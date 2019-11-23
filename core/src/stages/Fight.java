@@ -30,10 +30,17 @@ public class Fight {
     TextButtonStyle textButtonStyle;
     LabelStyle labelStyle;
     Label actionText;
+    Label info;
     
     public Action currAction;
     
+    boolean playerTurn = true;
+    
     Random rng = new Random();
+    
+    Player player;
+    
+    boolean complete;
     	
 	public Fight (Entity[] tenemies) {
 		stage = new Stage(Main.viewport);
@@ -55,10 +62,15 @@ public class Fight {
 		textButtonStyle.font = font;
 		labelStyle.font = font;
 		
-		enemies = tenemies;
-				
+		info = new Label ("", labelStyle);
+		
+		enemies = tenemies;	
+		
+		player = new Player ("");
+		
+		// Displays all player actions
 		int i = 0;
-		for (Action action : Player.actions) {
+		for (Action action : player.actions) {
 			action.button.setX(0, Align.bottomLeft);
 			action.button.setY(Main.SCREEN_HEIGHT - action.button.getHeight() - i);
 			stage.addActor(action.button);
@@ -76,7 +88,10 @@ public class Fight {
 							@Override
 							public void changed (ChangeEvent event, Actor actor) {
 								Entity target = enemies[Integer.parseInt(button.getText().toString())-1];
-								hitTarget (target, currAction);
+								if (target.health > 0)
+									hitTarget (target, currAction);
+								playerTurn = false;
+								turn ();
 					    	}
 						});
 					}
@@ -102,6 +117,56 @@ public class Fight {
 		}
 		
 		System.out.println ("TARGET " + target.name + " NOW HAS " + target.health + " HEALTH");
+	}
+	
+	public void turn () {
+		System.out.println ("TURN");
+		
+		if (!playerTurn) {
+			for (Action action : player.actions)
+				action.button.setVisible(false);
+			for (Entity enemy : enemies)
+				enemyAI (enemy);
+		}
+		else {
+			for (Action action : player.actions)
+				action.button.setVisible(true);
+		}
+		
+		String enemyHealth = "";
+		for (Entity enemy : enemies)
+			enemyHealth += enemy.health + " / " + enemy.maxHealth + "\n"; 
+		info.remove();
+		info = new Label ("HEALTH - " + Player.health + "\nENEMY HEALTHs - " + enemyHealth, labelStyle);
+		info.setX(Main.SCREEN_WIDTH / 2, Align.center);
+		info.setY(Main.SCREEN_HEIGHT / 2, Align.center);
+		stage.addActor(info);
+		
+		int countDead = 0;
+		for (Entity enemy : enemies)
+			if (enemy.health < 0)
+				countDead++;
+		if (countDead >= 6)
+			finishFight();
+		
+	}
+	
+	public void enemyAI (Entity enemy) {
+		hitTarget (player, enemy.getActions().get(0));
+		playerTurn = true;
+		turn();
+	}
+	
+	public void finishFight () {
+		System.out.println ("FIGHT FINISHED");
+		Main.battle.stop();
+		Main.hallways.play();
+		complete = true;
+		Main.location = "hamlet-tavern";
+	}
+	
+	public boolean complete () {
+		return complete;
 	}
 	
 }

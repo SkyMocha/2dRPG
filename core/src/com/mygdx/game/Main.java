@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 
 public class Main extends ApplicationAdapter {
@@ -43,6 +44,10 @@ public class Main extends ApplicationAdapter {
     HamletTavern hamletTavern;
     LonelyPatron lonelyPatron;
     IntroFight introFight;
+    
+    // MUSIC FILES
+    public static Music hallways;
+    public static Music battle;
     
     Scanner textReader;
     String readText = "";
@@ -65,6 +70,7 @@ public class Main extends ApplicationAdapter {
 						
 		location = "creation";
 		
+		// INSTANTIATE LOCATIONS
 		if (location.equals("creation")) {
 			creation = new CharacterCreation();
 		}
@@ -72,6 +78,13 @@ public class Main extends ApplicationAdapter {
 		hamletTavern = new HamletTavern();
 		lonelyPatron = new LonelyPatron();
 		introFight = new IntroFight();
+		
+		// INSTANTIATE AUDIO
+		hallways = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 1 - Hallways v.2.mp3"));
+		hallways.setLooping(true);
+		
+		battle = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 2 - J_Syreus_Bach_-_Lesser_Faith.mp3"));
+		battle.setLooping(true);
 		
 		Gdx.input.setInputProcessor(creation.stage);
 	}
@@ -95,6 +108,7 @@ public class Main extends ApplicationAdapter {
         		if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
         			intro = new Intro();
         			location = "intro";
+        			hallways.play();
         		}
         		break;
         	case "intro":
@@ -117,12 +131,30 @@ public class Main extends ApplicationAdapter {
         		lonelyPatron.stage.draw();
         		break;
         	case "tutorial-fight":
-        		Gdx.input.setInputProcessor(introFight.stage);
-        		introFight.stage.draw();
+        		if (introFight.complete())
+        			Main.location = "hamlet-tavern";
+        		else {
+        			hallways.stop();
+            		battle.play();
+            		Gdx.input.setInputProcessor(introFight.stage);
+            		introFight.stage.draw();
+        		}
+        		break;
+        	case "laboratory":
+        		break;
+        	case "hamlet-square":
+        		break;
+        	case "closed-off-fields":
+        		break;
+        	case "darkness":
+        		break;
+        	case "northern-passage":
         		break;
         	default:
         		break;
         }
+        
+        System.out.println (location);
         		
         batch.end();
 		
@@ -132,6 +164,8 @@ public class Main extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		creation.stage.dispose();
+		hamlet.stage.dispose();
+		intro.stage.dispose();
 	}
 	
 	public void resize(int width, int height) {

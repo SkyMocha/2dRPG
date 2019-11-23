@@ -7,48 +7,50 @@ import stages.ChoiceButton;
 
 public class Player extends Entity {
 		
+	// MAIN STATISTICS
 	public static int health;
-	public static int strength;
-	public static int dexterity;
+	public static int repair;
+	public static int readiness;
+	
+	public static int force;
+	public static int finesse;
+	
+	public static int courage;
 	public static int charisma;
+	
+	public static int mp;
 	public static int intelligence;
-	public static int wisdom;
+	public static int ingenuity;
 	
-	public static List<Action> actions;
-	
+	// SECONDARY STATISTICS
+	public static int composure;
+
+			
 	public Player () {
-		actions = new ArrayList<Action>();
+		super();
 		
-		strength = avg;
-		dexterity = avg;
+		repair = avg;
+		readiness = avg;
+		
+		force = avg;
+		finesse = avg;
+		
+		courage = avg;
 		charisma = avg;
+		
 		intelligence = avg;
-		wisdom = avg;
+		ingenuity = avg;
 		
 		health = 8;
+				
+	}
+	
+	public Player (String args) {
 		
-		addAction (
-				"Fist",
-				5,
-				100,
-				-1
-			);
 	}
 	
 	public void incHealth () {
-		health += strength/3;
+		health += repair/3;
 	}
-	
-	public void addAction (String tname, int tpower, int taccuracy, int theal) {
-		Action tempAction = new Action(
-					tname, tpower, taccuracy, theal
-				);
-		actions.add(tempAction);
-	}
-	
-	public Action[] getActions () {
-		return (Action[]) actions.toArray();
-	}
-	
 	
 }

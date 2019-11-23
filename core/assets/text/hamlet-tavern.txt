@@ -1,1 +1,6 @@
-You walk into the tavern, central to the hamlet you find yourself in.
+You walk into the tavern, central to the hamlet you find yourself in. 
+There is a fight of seemingly no consequence going on at 
+one corner of the tavern between three patrons.
+Beyond that, there are patrons scattered about the tavern. 
+You look around the different tables in this tavern, 
+each individual one giving you a... different feeling.

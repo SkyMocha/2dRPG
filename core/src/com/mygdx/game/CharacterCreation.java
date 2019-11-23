@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.Align;
 public class CharacterCreation {
 	Stage stage;
 	BitmapFont font;
-	CharSequence str = "Hello World!";
 	TextButton button;
     TextButtonStyle textButtonStyle;
     LabelStyle labelStyle;
@@ -40,16 +39,20 @@ public class CharacterCreation {
 		
 		
 		StatButton[] stats = new StatButton[] { 
-				new StatButton ("str", 1), 
-				new StatButton ("str", -1), 
-				new StatButton ("dex", 1), 
-				new StatButton ("dex", -1),
-				new StatButton ("chr", 1),
-				new StatButton ("chr", -1),
-				new StatButton ("int", 1),
-				new StatButton ("int", -1),
-				new StatButton ("wis", 1),
-				new StatButton ("wis", -1)
+				new StatButton ("repair", 1), 
+				new StatButton ("repair", -1), 
+				new StatButton ("force", 1), 
+				new StatButton ("force", -1),
+				new StatButton ("finesse", 1),
+				new StatButton ("finesse", -1),
+				new StatButton ("courage", 1),
+				new StatButton ("courage", -1),
+				new StatButton ("charisma", 1),
+				new StatButton ("charisma", -1),
+				new StatButton ("intelligence", 1),
+				new StatButton ("intelligence", -1),
+				new StatButton ("ingenuity", 1),
+				new StatButton ("ingenuity", -1),
 			};
 		
 		int i = 0;
@@ -62,7 +65,7 @@ public class CharacterCreation {
 		font.getData().setScale(2.5f, 2.5f);
 		labelStyle.font = font;
 		
-		statText = new Label("STATS: \n" + Player.strength + "\n" + Player.dexterity + "\n" + Player.charisma + "\n" + Player.intelligence + "\n" + Player.wisdom + "\nPoints: " + avaliablePoints, labelStyle);
+		statText = new Label("STATS: \n" + Player.repair + "\n" + Player.readiness + "\n" + Player.force + "\n" + Player.finesse + "\n" + Player.courage + "\n" + Player.courage + "\n" + Player.intelligence + "\n" + Player.ingenuity + "\nPoints: " + avaliablePoints, labelStyle);
 		statText.setX(Main.SCREEN_WIDTH*2/3, Align.center);
 		statText.setY(Main.SCREEN_HEIGHT - statText.getHeight() - 20);
 	
@@ -79,33 +82,40 @@ public class CharacterCreation {
 			
 			button.addListener(new ChangeListener() {
 				@Override
-				public void changed (ChangeEvent event, Actor actor) {
+				public void changed (ChangeEvent event, Actor actor) {		
+					// Checks to see if there are still available points
 					if (avaliablePoints <= 0 && inc > 0)
 						return;
-					
-					if ((Player.strength <= 1 || Player.dexterity <= 1 || Player.charisma <= 1 || Player.intelligence <= 1 || Player.wisdom <= 1) && inc < 0)
+												
+					// Adds to the value for the player
+					// Doesn't go below 1
+					if (stat.equals("repair") && (Player.repair > 1 || inc > 0))
+						Player.repair += inc;
+					else if (stat.equals("readiness") && (Player.readiness > 1 || inc > 0))
+						Player.readiness += inc;
+					else if (stat.equals("force") && (Player.force > 1 || inc > 0))
+						Player.force += inc;
+					else if (stat.equals("finesse") && (Player.finesse > 1 || inc > 0))
+						Player.finesse += inc;
+					else if (stat.equals("courage") && (Player.courage > 1 || inc > 0))
+						Player.courage += inc;
+					else if (stat.equals("charisma") && (Player.charisma > 1 || inc > 0))
+						Player.charisma += inc;
+					else if (stat.equals("intelligence") && (Player.intelligence > 1 || inc > 0))
+						Player.intelligence += inc;
+					else if (stat.equals("ingenuity") && (Player.ingenuity > 1 || inc > 0))
+						Player.ingenuity += inc;
+					else
 						return;
 					
-					if (stat.equals( "str"))
-						Player.strength += inc;
-					else if (stat.equals("dex"))
-						Player.dexterity += inc;
-					else if (stat.equals("chr"))
-						Player.charisma += inc;
-					else if (stat.equals("int"))
-						Player.intelligence += inc;
-					else if (stat.equals("wis"))
-						Player.wisdom += inc;
-					
+					// Adds or decreases the available points
 					if (inc > 0)
 						avaliablePoints--;
 					if (inc < 0)
 						avaliablePoints++;
 					
-					statText.remove();
-					statText = new Label("STATS: \n" + Player.strength + "\n" + Player.dexterity + "\n" + Player.charisma + "\n" + Player.intelligence + "\n" + Player.wisdom + "\nPoints: " + avaliablePoints, labelStyle);
-					statText.setX(Main.SCREEN_WIDTH*2/3, Align.center);
-					statText.setY(Main.SCREEN_HEIGHT - statText.getHeight() - 20);
+					// Updates text
+					statText.setText("STATS: \n" + Player.repair + "\n" + Player.readiness + "\n" + Player.force + "\n" + Player.finesse + "\n" + Player.courage + "\n" + Player.courage + "\n" + Player.intelligence + "\n" + Player.ingenuity + "\nPoints: " + avaliablePoints);
 				
 					stage.addActor(statText);
 					

@@ -13,11 +13,12 @@ public class Hamlet extends Town {
 
     public Hamlet() {
         this(new ChoiceButton[] { 
-        	new ChoiceButton ("Carpenters House"),
-        	new ChoiceButton ("Blacksmiths House"),
         	new ChoiceButton ("Tavern"),
-        	new ChoiceButton ("Royal Keep"),
-        	new ChoiceButton ("Town Square")
+        	new ChoiceButton ("Laboratory"),
+        	new ChoiceButton ("Hamlet Square"),
+        	new ChoiceButton ("Closed Off Fields"),
+        	new ChoiceButton ("Darkness"),
+        	new ChoiceButton ("Northern Passage"),
         });
     }
     
@@ -25,19 +26,22 @@ public class Hamlet extends Town {
     public void decisionTree (int index) {
 		switch (index) {
 			case 0:
-				Main.location = "hamlet-carpenter";
-				break;
-			case 1:
-				Main.location = "hamlet-blacksmith";
-				break;
-			case 2:
 				Main.location = "hamlet-tavern";
 				break;
+			case 1:
+				Main.location = "laborotory";
+				break;
+			case 2:
+				Main.location = "hamlet-square";
+				break;
 			case 3:
-				Main.location = "hamlet-keep";
+				Main.location = "closed-off-fields";
 				break;
 			case 4:
-				Main.location = "hamlet-square";
+				Main.location = "darkness";
+				break;
+			case 5:
+				Main.location = "northern-passage";
 				break;
 			default:
 				break;

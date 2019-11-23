@@ -55,15 +55,21 @@ public class ChoiceButton {
 		
 	}
 	boolean requirnments (String stat, int req) {
-		if (stat.equals ("str") && req < Player.strength)
+		if (stat.equals ("repair") && req < Player.repair)
 			return true;
-		else if (stat.equals ("dex") && req < Player.dexterity)
+		else if (stat.equals ("readiness") && req < Player.readiness)
 			return true;
-		else if (stat.equals ("chr") && req < Player.charisma)
+		else if (stat.equals ("force") && req < Player.force)
 			return true;
-		else if (stat.equals ("int") && req < Player.intelligence)
+		else if (stat.equals ("finesse") && req < Player.finesse)
 			return true;
-		else if (stat.equals ("wis") && req < Player.wisdom)
+		else if (stat.equals ("courage") && req < Player.courage)
+			return true;
+		else if (stat.equals ("charisma") && req < Player.courage)
+			return true;
+		else if (stat.equals ("intelligence") && req < Player.courage)
+			return true;
+		else if (stat.equals ("ingenuity") && req < Player.courage)
 			return true;
 		return false;
 	}

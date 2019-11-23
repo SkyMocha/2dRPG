@@ -108,7 +108,6 @@ public class NPC {
     	
     	choices = tchoices;
     	
-    	
     	changeStep (0);
 	}
 	
@@ -173,9 +172,11 @@ public class NPC {
 			currText = currText.substring(1);
 		
 		text.setText(currText);
+		text.layout();
+		text.pack();
 		
 		// Changes the y of the text so that longer peices of text still fit.
-		text.setY(Main.SCREEN_HEIGHT- text.getHeight() - 50, Align.topLeft);
+		text.setY(Main.SCREEN_HEIGHT, Align.topLeft);
 		
 		stage.addActor(text);
 		

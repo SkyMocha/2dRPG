@@ -11,7 +11,7 @@ public class Intro extends TextStages{
 
     public Intro() {
         this(new ChoiceButton[] { 
-        	new ChoiceButton ("You walk forwards"),
+        	new ChoiceButton ("Walk forwards."),
         });
     }
     
