@@ -29,6 +29,8 @@ public class Player extends Entity {
 	public Player () {
 		super();
 		
+		name = "Player";
+		
 		repair = avg;
 		readiness = avg;
 		

@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import hamlet.Bartender;
 import hamlet.Hamlet;
 import hamlet.HamletTavern;
 import hamlet.IntroFight;
@@ -42,8 +43,9 @@ public class Main extends ApplicationAdapter {
     Intro intro;
     Hamlet hamlet;
     HamletTavern hamletTavern;
-    LonelyPatron lonelyPatron;
+    public static LonelyPatron lonelyPatron;
     IntroFight introFight;
+    public static Bartender bartender;
     
     // MUSIC FILES
     public static Music hallways;
@@ -78,6 +80,7 @@ public class Main extends ApplicationAdapter {
 		hamletTavern = new HamletTavern();
 		lonelyPatron = new LonelyPatron();
 		introFight = new IntroFight();
+		bartender = new Bartender();
 		
 		// INSTANTIATE AUDIO
 		hallways = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 1 - Hallways v.2.mp3"));
@@ -128,6 +131,7 @@ public class Main extends ApplicationAdapter {
         		break;
         	case "lonely-patron":
         		Gdx.input.setInputProcessor(lonelyPatron.stage);
+        		lonelyPatron.update("");
         		lonelyPatron.stage.draw();
         		break;
         	case "tutorial-fight":
@@ -139,6 +143,11 @@ public class Main extends ApplicationAdapter {
             		Gdx.input.setInputProcessor(introFight.stage);
             		introFight.stage.draw();
         		}
+        		break;
+        	case "hamlet-bartender":
+        		Gdx.input.setInputProcessor(bartender.stage);
+        		bartender.update();
+        		bartender.stage.draw();
         		break;
         	case "laboratory":
         		break;

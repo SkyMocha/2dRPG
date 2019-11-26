@@ -21,7 +21,7 @@ import com.mygdx.game.Main;
 import com.mygdx.game.Player;
 import java.util.Random;
 
-public class Fight {
+public abstract class Fight {
 	Entity[] enemies;
 	public Stage stage;
 	
@@ -144,7 +144,7 @@ public class Fight {
 		
 		int countDead = 0;
 		for (Entity enemy : enemies)
-			if (enemy.health < 0)
+			if (enemy.health <= 0)
 				countDead++;
 		if (countDead >= 6)
 			finishFight();
@@ -162,11 +162,14 @@ public class Fight {
 		Main.battle.stop();
 		Main.hallways.play();
 		complete = true;
+		onCompletion ();
 		Main.location = "hamlet-tavern";
 	}
 	
 	public boolean complete () {
 		return complete;
 	}
+	
+	public abstract void onCompletion();
 	
 }

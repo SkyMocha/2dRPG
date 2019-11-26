@@ -7,6 +7,8 @@ import stages.NPC;
 import stages.TextStages;
 
 public class LonelyPatron extends NPC {
+	
+	public static boolean robbed = false;
 
 	public LonelyPatron(ChoiceButton[][] tchoices, String textFile) {
 		super (tchoices, textFile);
@@ -19,7 +21,7 @@ public class LonelyPatron extends NPC {
         		// Case 0
         		new ChoiceButton ("Hello."),
         		// Case 1
-                new ChoiceButton ("[dex 3] Rob"),
+                new ChoiceButton ("[dex 3] Rob", true),
                 // Case 2
                 new ChoiceButton ("Leave"),
         	},
@@ -50,7 +52,7 @@ public class LonelyPatron extends NPC {
         	{
         		// Case 10
         		new ChoiceButton ("Sorry for disturbing you, do you have any idea as to where we are?"),
-        		// Case 111
+        		// Case 11
                 new ChoiceButton ("Leave"),
         	},
         	// currStep 5
@@ -71,6 +73,7 @@ public class LonelyPatron extends NPC {
 				break;
 			case 1:
 				changeStep(2);
+				robbed = true;
 				break;
 			case 2:
 				decisionTree(-1);
@@ -97,16 +100,22 @@ public class LonelyPatron extends NPC {
 				decisionTree(-1);
 				break;
 			case 10:
+				Bartender.lonelyPatronCheck = true;
+				Bartender.lonelyPatronRemains = false;
 				changeStep (5);
 				break;
 			case 11:
 				decisionTree(-1);
 				break;
 			default:
-				changeStep (0);
+				Main.lonelyPatron = new LonelyPatron();
 				Main.location = "hamlet";
 				break;
 		}
+	}
+	
+	public void updateHelper () {
+		updateButton (0, 1, !robbed);
 	}
 
 }

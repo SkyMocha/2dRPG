@@ -22,4 +22,9 @@ public class IntroFight extends Fight {
         	new Empty("Chair"),
         });
     }
+	
+	public void onCompletion () {
+		System.out.println ("FIGHT DONE");
+		Bartender.fightCheck = true;
+	}
 }

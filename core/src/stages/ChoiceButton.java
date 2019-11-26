@@ -25,6 +25,8 @@ public class ChoiceButton {
 	FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 	
 	int index;
+	
+	public boolean show = true;
     
 	public ChoiceButton (final String text) {
 		
@@ -39,6 +41,11 @@ public class ChoiceButton {
 		
 		textButtonStyle.font = font;
 		button = new TextButton(text, textButtonStyle);
+	}
+	
+	public ChoiceButton (final String text, boolean tshow) {
+		this (text);
+		show = tshow;
 	}
 
 	// If the event requires a skill check, it sees whether you can pass it or not

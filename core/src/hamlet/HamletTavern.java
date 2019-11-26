@@ -20,7 +20,8 @@ public class HamletTavern extends TextStages {
         	new ChoiceButton ("[chr 15] Sit at the familiar, yet painful table."),
         	new ChoiceButton ("[chr 12] Sit at the lonely, yet familiar table."),
         	new ChoiceButton ("Sit at the lighthearted table."),
-        	new ChoiceButton ("Sit at the lonely table"),
+        	new ChoiceButton ("Sit at the lonely table."),
+        	new ChoiceButton ("Speak with the bartender."),
         });
     }
     
@@ -50,6 +51,12 @@ public class HamletTavern extends TextStages {
 					} catch(InterruptedException e) {
 					    System.out.println("Thread got interrupted! >:(");
 					}
+				break;
+			case 6:
+					pindex = -1;
+					Main.location = "hamlet-bartender";
+					setText();
+					
 				break;
 			default:
 				break;
