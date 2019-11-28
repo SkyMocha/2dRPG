@@ -86,4 +86,26 @@ public class Town {
 				break;
 		}
 	}
+	
+	public void update () {
+		updateHelper();
+		int i = 0;
+		for (ChoiceButton choice : locations)
+			if (choice.show) {			
+				choice.button.setX(0, Align.bottomLeft);
+				choice.button.setY(Main.SCREEN_HEIGHT - choice.button.getHeight() - i);
+				i += 70;
+				choice.button.setVisible(true);
+			}
+			else
+				choice.button.setVisible(false);
+	}
+	
+	public void updateHelper() {
+		
+	}
+	
+	public void updateButton (int x, boolean bool) {
+		locations[x].show = bool;
+	}
 }

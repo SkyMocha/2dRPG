@@ -1,6 +1,6 @@
 (0)You approach the lonely patron, however he does not seem to take note of you.
 (break)
-(1)You introduce yourself to the lonely patron.
+(1)You greet the lonely patron.
 (break)
 (2)You steal the belongings of the lonely patron, 
 yet he does not seem to notice.
@@ -15,12 +15,15 @@ although he doesn't look you in the eyes.
 “Hello…”
 His voice is soft, yet distant from the chaos of the tavern.
 (break)
-(5) We are all lost souls, looking for some place.
+(5)We are all lost souls, looking for some place.
 The fact you ask this question, shows you need guidance
 through the dark path that lies ahead.
 Good luck in finding yourself.
 *He takes a swig from his mug*
 Sure know I need to.
+Watch your back, this is a dangerous world.
+The invisible hand moves people like pawns here.
 He gets up, and walks into the crowd.
 No matter how much you try to find him,
 He has disappeared.
+He seemed somewhat..... familiar.

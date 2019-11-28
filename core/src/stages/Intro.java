@@ -25,7 +25,7 @@ public class Intro extends TextStages{
 				if (drawText("You walk forwards, stumbling through the darkness."))
 					try {
 						Thread.sleep(2500);
-						Main.location = "hamlet";
+						Main.location = "intro2";
 					} catch(InterruptedException e) {
 					    System.out.println("Thread got interrupted! >:(");
 					}

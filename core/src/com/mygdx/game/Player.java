@@ -21,10 +21,13 @@ public class Player extends Entity {
 	public static int mp;
 	public static int intelligence;
 	public static int ingenuity;
+	public static int image;
+	
+	public static int sanity;
 	
 	// SECONDARY STATISTICS
 	public static int composure;
-
+	public static int perception;
 			
 	public Player () {
 		super();
@@ -42,8 +45,11 @@ public class Player extends Entity {
 		
 		intelligence = avg;
 		ingenuity = avg;
+		image = avg;
 		
 		health = 8;
+		
+		sanity = 50;
 				
 	}
 	

@@ -9,10 +9,10 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		
 		config.title = "NickStudios 2dRPG";
-//		config.width = 1080;
-//	    config.height = 720;
+		config.width = 1080;
+	    config.height = 720;
 //	    config.resizable = false;
-	    config.fullscreen = true;
+//	    config.fullscreen = true;
 	    config.foregroundFPS = 60;
 		
 		new LwjglApplication(new Main(), config);

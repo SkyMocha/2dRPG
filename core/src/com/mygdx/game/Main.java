@@ -16,10 +16,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import hamlet.Bartender;
 import hamlet.Hamlet;
+import hamlet.HamletCollectHouse;
 import hamlet.HamletTavern;
 import hamlet.IntroFight;
+import hamlet.LightheartedTable;
 import hamlet.LonelyPatron;
+import hamlet.LonelyTable;
 import stages.Intro;
+import stages.Intro2;
+import stages.NPC;
 import stages.TextStages;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -41,15 +46,20 @@ public class Main extends ApplicationAdapter {
 	// STAGES
     CharacterCreation creation;
     Intro intro;
+    Intro2 intro2;
     Hamlet hamlet;
     HamletTavern hamletTavern;
     public static LonelyPatron lonelyPatron;
     IntroFight introFight;
     public static Bartender bartender;
+    public static LightheartedTable lightheartedTable;
+    public static LonelyTable lonelyTable;
+    public static HamletCollectHouse hamletCollectHouse;
     
     // MUSIC FILES
     public static Music hallways;
     public static Music battle;
+    public static Music towns;
     
     Scanner textReader;
     String readText = "";
@@ -81,13 +91,22 @@ public class Main extends ApplicationAdapter {
 		lonelyPatron = new LonelyPatron();
 		introFight = new IntroFight();
 		bartender = new Bartender();
+		lightheartedTable = new LightheartedTable();
+		lonelyTable = new LonelyTable();
+		hamletCollectHouse = new HamletCollectHouse();
 		
 		// INSTANTIATE AUDIO
-		hallways = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 1 - Hallways v.2.mp3"));
+		hallways = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 1 - Lonely Hallway v.2.mp3"));
 		hallways.setLooping(true);
+		hallways.setVolume(0f);
 		
-		battle = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 2 - J_Syreus_Bach_-_Lesser_Faith.mp3"));
+		battle = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 2 - Lonely Battle.mp3"));
 		battle.setLooping(true);
+		battle.setVolume(0f);
+		
+		towns = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 3 - Lonely Town.mp3"));
+		towns.setLooping(true);
+		towns.setVolume(0f);
 		
 		Gdx.input.setInputProcessor(creation.stage);
 	}
@@ -110,44 +129,51 @@ public class Main extends ApplicationAdapter {
         		creation.stage.draw();
         		if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
         			intro = new Intro();
+        			intro2 = new Intro2();
         			location = "intro";
         			hallways.play();
         		}
         		break;
         	case "intro":
-        		Gdx.input.setInputProcessor(intro.stage);
-        		intro.update();
-        		intro.stage.draw();
-        		intro.stage.act();
+        		textStage(intro);
+        		break;
+        	case "intro2":
+        		textStage(intro2);
         		break;
         	case "hamlet":
+        		hallways.stop();
+        		towns.play();
+        		hamlet.update();
         		Gdx.input.setInputProcessor(hamlet.stage);
         		hamlet.stage.draw();
         		break;
         	case "hamlet-tavern":
-        		Gdx.input.setInputProcessor(hamletTavern.stage);
-        		hamletTavern.update();
-        		hamletTavern.stage.draw();
+        		textStage (hamletTavern);
         		break;
         	case "lonely-patron":
-        		Gdx.input.setInputProcessor(lonelyPatron.stage);
-        		lonelyPatron.update("");
-        		lonelyPatron.stage.draw();
+        		npc (lonelyPatron, "");
         		break;
         	case "tutorial-fight":
         		if (introFight.complete())
         			Main.location = "hamlet-tavern";
         		else {
-        			hallways.stop();
+        			towns.stop();
             		battle.play();
             		Gdx.input.setInputProcessor(introFight.stage);
             		introFight.stage.draw();
         		}
         		break;
         	case "hamlet-bartender":
-        		Gdx.input.setInputProcessor(bartender.stage);
-        		bartender.update();
-        		bartender.stage.draw();
+        		npc (bartender);
+        		break;
+        	case "lonely-table":
+        		npc (lonelyTable, "");
+        		break;
+        	case "lighthearted-table":
+        		npc (lightheartedTable);
+        		break;
+        	case "hamlet-collection-house":
+        		npc (hamletCollectHouse, "");
         		break;
         	case "laboratory":
         		break;
@@ -180,6 +206,23 @@ public class Main extends ApplicationAdapter {
 	public void resize(int width, int height) {
         viewport.update(width, height);
     }
+	
+	public void textStage (TextStages textStage) {
+		Gdx.input.setInputProcessor(textStage.stage);
+		textStage.update();
+		textStage.stage.draw();
+		textStage.stage.act();
+	}
+	public void npc (NPC npc) {
+		Gdx.input.setInputProcessor(npc.stage);
+		npc.update();
+		npc.stage.draw();
+	}
+	public void npc (NPC npc, String s) {
+		Gdx.input.setInputProcessor(npc.stage);
+		npc.update("");
+		npc.stage.draw();
+	}
 	
 	
 }

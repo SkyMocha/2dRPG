@@ -1,5 +1,7 @@
 package stages;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
@@ -208,13 +210,15 @@ public class NPC {
 	}
 	
 	// The single step for single step dialogue choices
-	public void singleStep (int index) {		
+	public void singleStep (int index) {	
 		// Formats the current text
 		currText = readText.split("(break)")[index];
 		currText = currText.replace("(", "").replace(")", "");
 		currText = currText.replaceFirst(System.getProperty("line.separator"), "");
 		while (Character.isDigit(currText.charAt(0)))
 			currText = currText.substring(1);
+		
+		System.out.println (currText);
 		
 		text.setText(currText);
 		text.layout();
@@ -224,6 +228,26 @@ public class NPC {
 		text.setY(Main.SCREEN_HEIGHT, Align.topLeft);
 		
 		stage.addActor(text);
+		
+		// Returns if its the first index of the text file
+		if (index == 0)
+			return;
+		
+		// Adds the leave button
+		for (ChoiceButton choice : singleChoices)
+			choice.button.remove();
+		
+		ChoiceButton leaveButton = new ChoiceButton ("Leave");
+		leaveButton.button.addListener(new ChangeListener() {
+			@Override
+			public void changed (ChangeEvent event, Actor actor) {
+				decisionTree (-1);
+			}
+		});
+		leaveButton.button.align(Align.bottomRight);
+		leaveButton.button.setX(Main.SCREEN_WIDTH - 100);
+		stage.addActor(leaveButton.button);
+		
 	}
 	
 	// Updates the buttons to see if they should be shown or not
@@ -284,6 +308,17 @@ public class NPC {
 				stage.addActor(choice.button);
 			}
 		}
+	}
+	
+	// Turns a single number index into a ChoiceButton from choices
+	public ChoiceButton indexToChoice (int index) {
+		
+		List <ChoiceButton> choices1D = new ArrayList<ChoiceButton>();
+		for (ChoiceButton[] choiceList : choices)
+			for (ChoiceButton choice : choiceList)
+				choices1D.add(choice);
+		return choices1D.get(index);
+		
 	}
 	
 }

@@ -1,0 +1,22 @@
+(0)Although you cannot see those sitting at the table, you can tell there are two men, 
+one cloaked, and one with a tough build; and one woman, an adept mage.
+You can feel the hostile presence of their gaze, even through the darkness.
+"Greetings," uttered by the woman as you sit down at their table.
+(break)
+(1)”Yes... the isolation leaves us more perceptive to our surroundings in this darkness.
+We're a wary crew.” The woman emphasizes the word crew,
+as if the crew extends beyond these three, as if they have eyes hidden throughout the darkness.
+Eyes that perceive your every move.
+You order a drink, and begin striking up conversation with them.
+[Image 12]You feel the hooded man tap his foot three times.
+The hooded man gets up, walking past you.
+(break)
+(2)We know very little of him.
+(break)
+(3)The woman looks you in the eye, 
+"quite perceptive of you, yet we found nothing of value.
+Perhaps you would like to do a little something for us,
+and we'll pay. 
+It’s a simple collection of money, on behalf of the town.
+We’ll accept payment in either a finger, or coin.
+Here’s his name and location should you choose to accept.”

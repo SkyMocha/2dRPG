@@ -1,6 +1,7 @@
 package hamlet;
 
 import com.mygdx.game.Main;
+import com.mygdx.game.Player;
 
 import stages.ChoiceButton;
 import stages.NPC;
@@ -10,6 +11,8 @@ public class Bartender extends NPC {
 	public static boolean lonelyPatronRemains = true;
 	public static boolean lonelyPatronCheck = false;
 	public static boolean fightCheck = false;
+	
+	Player player = new Player("");
 	
 	public Bartender(ChoiceButton[] tchoices) {
 		super(tchoices, "hamlet-bartender");
@@ -25,36 +28,25 @@ public class Bartender extends NPC {
 	}
 	
 	public void decisionTree (int index) {
-		
-		try {
-		
 			switch (index) {
-				case 0:
-					singleStep (1);
-					Thread.sleep(2500);
-					Main.location = "hamlet-tavern";
-					break;
-				case 1:
-					singleStep (2);
-					Thread.sleep(2500);
-					Main.location = "hamlet-tavern";
-					break;
-				case 2:
-					singleStep (3);
-					Thread.sleep(2500);
-					Main.location = "hamlet-tavern";
-					break;
-				case 3:
-					singleStep(-1);
-					break;
-				default:
-					Main.bartender = new Bartender();
-					Main.location = "hamlet-tavern";
-					break;
-			}
-		
-		} catch(InterruptedException e) {
-			System.out.println("Thread got interrupted! >:(");
+			case 0:
+				singleStep (1);
+				break;
+			case 1:
+				singleStep (2);
+				fightCheck = false;
+				player.addAction("Primitive Dagger", 3, 75, 0);
+				break;
+			case 2:
+				singleStep (3);
+				break;
+			case 3:
+				decisionTree(-1);
+				break;
+			default:
+				Main.bartender = new Bartender();
+				Main.location = "hamlet-tavern";
+				break;
 		}
 	}
 	

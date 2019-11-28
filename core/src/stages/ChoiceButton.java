@@ -17,7 +17,7 @@ import com.mygdx.game.Main;
 import com.mygdx.game.Player;
 
 public class ChoiceButton {
-	TextButton button;
+	public TextButton button;
     TextButtonStyle textButtonStyle;
     BitmapFont font;
 	
@@ -55,13 +55,19 @@ public class ChoiceButton {
 			String stat = prefix.split(" ")[0];
 			int req = Integer.parseInt(prefix.split(" ")[1]);
 					
-			if (!requirnments(stat, req))
+			System.out.println("STAT " + stat + " REQ" + req);
+			
+			if (!requirnments(stat, req)) {
+				show = false;
 				return false;
+			}
 		}
 		return true;
 		
 	}
 	boolean requirnments (String stat, int req) {
+		stat = stat.toLowerCase();
+		
 		if (stat.equals ("repair") && req < Player.repair)
 			return true;
 		else if (stat.equals ("readiness") && req < Player.readiness)
@@ -77,6 +83,8 @@ public class ChoiceButton {
 		else if (stat.equals ("intelligence") && req < Player.courage)
 			return true;
 		else if (stat.equals ("ingenuity") && req < Player.courage)
+			return true;
+		else if (stat.equals ("image") && req < Player.image)
 			return true;
 		return false;
 	}

@@ -14,6 +14,7 @@ public class Hamlet extends Town {
     public Hamlet() {
         this(new ChoiceButton[] { 
         	new ChoiceButton ("Tavern"),
+        	new ChoiceButton ("Collection House", false),
         	new ChoiceButton ("Laboratory"),
         	new ChoiceButton ("Hamlet Square"),
         	new ChoiceButton ("Closed Off Fields"),
@@ -29,22 +30,29 @@ public class Hamlet extends Town {
 				Main.location = "hamlet-tavern";
 				break;
 			case 1:
-				Main.location = "laborotory";
+				Main.location = "hamlet-collection-house";
 				break;
 			case 2:
-				Main.location = "hamlet-square";
+				Main.location = "laborotory";
 				break;
 			case 3:
-				Main.location = "closed-off-fields";
+				Main.location = "hamlet-square";
 				break;
 			case 4:
-				Main.location = "darkness";
+				Main.location = "closed-off-fields";
 				break;
 			case 5:
+				Main.location = "darkness";
+				break;
+			case 6:
 				Main.location = "northern-passage";
 				break;
 			default:
 				break;
 		}
 	}
+    
+    public void updateHelper () {
+    	updateButton (1, LonelyTable.collectionHouse);
+    }
 }

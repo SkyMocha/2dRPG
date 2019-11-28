@@ -38,7 +38,7 @@ public abstract class Fight {
     
     Random rng = new Random();
     
-    Player player;
+    public Player player;
     
     boolean complete;
     	
@@ -160,7 +160,6 @@ public abstract class Fight {
 	public void finishFight () {
 		System.out.println ("FIGHT FINISHED");
 		Main.battle.stop();
-		Main.hallways.play();
 		complete = true;
 		onCompletion ();
 		Main.location = "hamlet-tavern";

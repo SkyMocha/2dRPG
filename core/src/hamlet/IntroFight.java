@@ -1,6 +1,7 @@
 package hamlet;
 
 import com.mygdx.game.Entity;
+import com.mygdx.game.Main;
 
 import enemies.Empty;
 import enemies.Zombie;
@@ -26,5 +27,6 @@ public class IntroFight extends Fight {
 	public void onCompletion () {
 		System.out.println ("FIGHT DONE");
 		Bartender.fightCheck = true;
+		Main.towns.play();
 	}
 }

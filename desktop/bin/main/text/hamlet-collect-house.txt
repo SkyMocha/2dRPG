@@ -1,0 +1,27 @@
+(0)You walk inside the house the group at the tavern wishes you to collect from.
+The air begins to feel denser as you venture inside their home.
+Inside you hear a voice… full of nervousness bordering on an insane paranoia. 
+The voice slowly calls out who has entered his dwelling.
+You hear the quick retrieval of a kitchen knife, and the sense of an intent to kill.
+(break)
+(1)The man drops the knife, 
+”Your voice is new. I have nothing of value in this house to give to these mercenaries.
+You seem to be no match for their skills, considering you are one, and they are many.”
+The man's voice then turns somber, “I have walked down a road that will only lead to death.”
+He gazes into your soul, “you may kill me so they do not disturb what little I have left.”
+(break)
+(2)His voice pleads, “I live a life of torment and paranoia because of them.
+Should you spare me, I will continue to live that life.”
+(break)
+(3)You choose to spare him, not having the guts to kill him.
+Although you feel like a better person, you feel this decision weigh down on you.
+Is death an acceptable end to pain? No, it can't be...
+(break)
+(4)Out of mercy for his condition, you slay him.
+Is death an acceptable end to pain?
+(break)
+(5)Out of an understanding for his condition, you slay him.
+Is death an acceptable end to pain?
+(break)
+(6)Tasting the rewards so close in hand, you slay him,
+and cut off a finger to prove that he has been slain.

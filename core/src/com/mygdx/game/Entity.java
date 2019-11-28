@@ -20,7 +20,7 @@ public class Entity {
 	public int intelligence;
 	public int ingenuity;
 	
-	public int avg = 9;
+	public int avg = 15; // DEFAULT OF 9
 	
 	public int maxHealth;
 	
@@ -32,7 +32,7 @@ public class Entity {
 		addAction (
 				"Fist",
 				1,
-				100,
+				60,
 				-1
 			);
 		

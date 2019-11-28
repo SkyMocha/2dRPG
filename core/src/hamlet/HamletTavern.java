@@ -15,13 +15,12 @@ public class HamletTavern extends TextStages {
 
     public HamletTavern() {
         this(new ChoiceButton[] { 
-        	new ChoiceButton ("Talk to the lonely patron."),
-        	new ChoiceButton ("Interrupt the fight."),
-        	new ChoiceButton ("[chr 15] Sit at the familiar, yet painful table."),
-        	new ChoiceButton ("[chr 12] Sit at the lonely, yet familiar table."),
-        	new ChoiceButton ("Sit at the lighthearted table."),
-        	new ChoiceButton ("Sit at the lonely table."),
-        	new ChoiceButton ("Speak with the bartender."),
+        	new ChoiceButton ("Talk to the lonely patron."), // 0
+        	new ChoiceButton ("Interrupt the fight."), // 1
+        	new ChoiceButton ("Sit at the lighthearted table."), // 2
+        	new ChoiceButton ("Sit at the lonely table."), // 3
+        	new ChoiceButton ("Speak with the bartender."), // 4
+        	new ChoiceButton ("Leave."), // 5
         });
     }
     
@@ -52,12 +51,37 @@ public class HamletTavern extends TextStages {
 					    System.out.println("Thread got interrupted! >:(");
 					}
 				break;
-			case 6:
+			case 2:
+				if (drawText("You sit at the lighthearted table."))
+					try {
+						pindex = -1;
+						Thread.sleep(2000);
+						Main.location = "lighthearted-table";
+						setText();
+					} catch(InterruptedException e) {
+					    System.out.println("Thread got interrupted! >:(");
+					}
+				break;
+			case 3:
+				if (drawText("You sit at the lonely table.\nIt seems less lonely than the single stool the lonely patron inhabits,\nMaybe you can get some answers from them."))
+					try {
+						pindex = -1;
+						Thread.sleep(2000);
+						Main.location = "lonely-table";
+						setText();
+					} catch(InterruptedException e) {
+					    System.out.println("Thread got interrupted! >:(");
+					}
+				break;
+			case 4:
 					pindex = -1;
 					Main.location = "hamlet-bartender";
 					setText();
-					
 				break;
+			case 5:
+				pindex = -1;
+				Main.location = "hamlet";
+				setText();
 			default:
 				break;
 		}
