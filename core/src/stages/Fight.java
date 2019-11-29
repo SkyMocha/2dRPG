@@ -22,7 +22,7 @@ import com.mygdx.game.Player;
 import java.util.Random;
 
 public abstract class Fight {
-	Entity[] enemies;
+	public Entity[] enemies;
 	public Stage stage;
 	
 	BitmapFont font;
@@ -37,9 +37,7 @@ public abstract class Fight {
     boolean playerTurn = true;
     
     Random rng = new Random();
-    
-    public Player player;
-    
+       
     boolean complete;
     	
 	public Fight (Entity[] tenemies) {
@@ -65,12 +63,14 @@ public abstract class Fight {
 		info = new Label ("", labelStyle);
 		
 		enemies = tenemies;	
+				
+		onStart();
 		
-		player = new Player ("");
+		System.out.println (Player.actions);
 		
 		// Displays all player actions
 		int i = 0;
-		for (Action action : player.actions) {
+		for (Action action : Player.actions) {
 			action.button.setX(0, Align.bottomLeft);
 			action.button.setY(Main.SCREEN_HEIGHT - action.button.getHeight() - i);
 			stage.addActor(action.button);
@@ -82,18 +82,24 @@ public abstract class Fight {
 			action.button.addListener(new ChangeListener() {
 				@Override
 				public void changed (ChangeEvent event, Actor actor) {
+					int count = 0;
 					for (final TextButton button : currAction.targets) {
-						stage.addActor(button);
-						button.addListener(new ChangeListener() {
-							@Override
-							public void changed (ChangeEvent event, Actor actor) {
-								Entity target = enemies[Integer.parseInt(button.getText().toString())-1];
-								if (target.health > 0)
-									hitTarget (target, currAction);
-								playerTurn = false;
-								turn ();
-					    	}
-						});
+						// Checks to see whether the amount of enemies is less than the amount of targets
+						if (count < enemies.length) {
+							// Adds the target button
+							stage.addActor(button);
+							button.addListener(new ChangeListener() {
+								@Override
+								public void changed (ChangeEvent event, Actor actor) {
+									Entity target = enemies[Integer.parseInt(button.getText().toString())-1];
+									if (target.health > 0)
+										hitTarget (target, currAction);
+									playerTurn = false;
+									turn ();
+						    	}
+							});
+						}
+						count ++;
 					}
 					
 		    	}
@@ -111,6 +117,8 @@ public abstract class Fight {
 		// Based off the two dice rolls principle Mr. Luo taught me
 		int hitChance = (int)(rng.nextInt(100) + rng.nextInt(100))/2;
 		
+		System.out.println (hitChance);
+		
 		if (hitChance < action.accuracy) {
 			target.health -= action.power;
 			target.health += action.heal;
@@ -118,18 +126,33 @@ public abstract class Fight {
 		
 		System.out.println ("TARGET " + target.name + " NOW HAS " + target.health + " HEALTH");
 	}
+	public void hitTarget (Action action) {
+		System.out.println ("HITTING " + Player.name + " WITH " + action.name);
+		
+		// Based off the two dice rolls principle Mr. Luo taught me
+		int hitChance = (int)(rng.nextInt(100) + rng.nextInt(100))/2;
+		
+		System.out.println (hitChance);
+		
+		if (hitChance < action.accuracy) {
+			Player.health -= action.power;
+			Player.health += action.heal;
+		}
+		
+		System.out.println ("TARGET " + Player.name + " NOW HAS " + Player.health + " HEALTH");
+	}
 	
 	public void turn () {
 		System.out.println ("TURN");
 		
 		if (!playerTurn) {
-			for (Action action : player.actions)
+			for (Action action : Player.actions)
 				action.button.setVisible(false);
 			for (Entity enemy : enemies)
 				enemyAI (enemy);
 		}
 		else {
-			for (Action action : player.actions)
+			for (Action action : Player.actions)
 				action.button.setVisible(true);
 		}
 		
@@ -146,13 +169,13 @@ public abstract class Fight {
 		for (Entity enemy : enemies)
 			if (enemy.health <= 0)
 				countDead++;
-		if (countDead >= 6)
+		if (countDead >= enemies.length)
 			finishFight();
 		
 	}
 	
 	public void enemyAI (Entity enemy) {
-		hitTarget (player, enemy.getActions().get(0));
+		hitTarget (enemy.getActions().get(0));
 		playerTurn = true;
 		turn();
 	}
@@ -170,5 +193,6 @@ public abstract class Fight {
 	}
 	
 	public abstract void onCompletion();
+	public abstract void onStart ();
 	
 }

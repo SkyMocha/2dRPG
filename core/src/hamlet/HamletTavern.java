@@ -43,6 +43,7 @@ public class HamletTavern extends TextStages {
 			case 1:
 				if (drawText("You step in to interrupt the fight."))
 					try {
+						Main.introFight = new IntroFight();
 						pindex = -1;
 						Thread.sleep(2000);
 						Main.location = "tutorial-fight";

@@ -57,6 +57,7 @@ public class LonelyTable extends NPC {
 			case 3:
 			case 4:
 				collectionHouse = true;
+				Main.collectFight = new CollectFight();
 			default:
 				Main.lonelyTable = new LonelyTable();
 				Main.location = "hamlet-tavern";

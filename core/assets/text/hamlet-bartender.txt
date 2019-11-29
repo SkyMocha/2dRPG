@@ -1,13 +1,13 @@
-Good'vning, what can I get you?
+(0)Good'vning, what can I get you?
 (break)
-The lonely patron has been here for some time,
+(1)The lonely patron has been here for some time,
 Occasionally orders a glass,
 Yet, it seems he sits here, waiting for someone.
 (break)
-I feel as though you've had a little too much to drink.
+(2)I feel as though you've had a little too much to drink.
 I have not seen anyone by that description here tonight.
 (break)
-Ah, yes, thank you very much for stopping that.
+(3)Ah, yes, thank you very much for stopping that.
 Here's some coin, and a small gift of gratitude,
 as you seem someone of capable strength.
 [he hands you a primitive dagger]

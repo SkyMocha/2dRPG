@@ -5,7 +5,7 @@ import java.util.List;
 
 import stages.ChoiceButton;
 
-public class Player extends Entity {
+public class Player {
 		
 	// MAIN STATISTICS
 	public static int health;
@@ -28,11 +28,17 @@ public class Player extends Entity {
 	// SECONDARY STATISTICS
 	public static int composure;
 	public static int perception;
-			
+	
+	public static List<Action> actions;
+				
+	public int avg = 15;
+	public static String name;
+	
 	public Player () {
-		super();
 		
-		name = "Player";
+		actions = new ArrayList<Action>();
+		
+		name = "player";
 		
 		repair = avg;
 		readiness = avg;
@@ -50,6 +56,13 @@ public class Player extends Entity {
 		health = 8;
 		
 		sanity = 50;
+		
+		addAction (
+				"Fist",
+				1,
+				60,
+				-1
+			);
 				
 	}
 	
@@ -59,6 +72,13 @@ public class Player extends Entity {
 	
 	public void incHealth () {
 		health += repair/3;
+	}
+	
+	public static void addAction (String tname, int tpower, int taccuracy, int theal) {
+		Action tempAction = new Action(
+					tname, tpower, taccuracy, theal
+				);
+		actions.add(tempAction);
 	}
 	
 }

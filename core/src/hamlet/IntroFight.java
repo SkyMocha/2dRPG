@@ -24,9 +24,16 @@ public class IntroFight extends Fight {
         });
     }
 	
+	@Override
 	public void onCompletion () {
 		System.out.println ("FIGHT DONE");
 		Bartender.fightCheck = true;
 		Main.towns.play();
+	}
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		
 	}
 }

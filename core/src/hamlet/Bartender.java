@@ -34,13 +34,14 @@ public class Bartender extends NPC {
 				break;
 			case 1:
 				singleStep (2);
-				fightCheck = false;
-				player.addAction("Primitive Dagger", 3, 75, 0);
 				break;
 			case 2:
+				fightCheck = false;
+				player.addAction("Primitive Dagger", 3, 75, 0);
 				singleStep (3);
 				break;
 			case 3:
+				System.out.println ("LEAVE");
 				decisionTree(-1);
 				break;
 			default:

@@ -56,6 +56,7 @@ public class HamletCollectHouse extends NPC {
 				break;
 			case 1:
 				System.out.println ("FIGHT INITIATED");
+				Main.location = "hamlet-collect-fight";
 				break;
 			case 2:
 				changeStep(2);
