@@ -3,6 +3,7 @@ package stages;
 import com.mygdx.game.Main;
 
 public class Intro2 extends TextStages {
+	
 	private Intro2(ChoiceButton[] t) {
         super(t, "intro2");
         // continue doing stuff with t here

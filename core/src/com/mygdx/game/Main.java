@@ -10,8 +10,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import hamlet.Bartender;
@@ -31,6 +35,7 @@ import stages.TextStages;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -63,11 +68,14 @@ public class Main extends ApplicationAdapter {
     public static Music battle;
     public static Music towns;
     
+    Texture backgroundTexture1;
+    public static Image backgroundSprite1;
+    Texture backgroundTexture2;
+    public static Image backgroundSprite2;
+    
     Scanner textReader;
     String readText = "";
-	
-	int tileSize = 32;
-	
+		
 	public static int SCREEN_WIDTH = 1920;
 
 	public static int SCREEN_HEIGHT = 1080;
@@ -81,7 +89,9 @@ public class Main extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 		viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera);
-						
+		
+		defineImages();
+				
 		location = "creation";
 		
 		// INSTANTIATE LOCATIONS
@@ -99,15 +109,18 @@ public class Main extends ApplicationAdapter {
 		// INSTANTIATE AUDIO
 		hallways = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 1 - Lonely Hallway v.2.mp3"));
 		hallways.setLooping(true);
-		hallways.setVolume(0f);
+		hallways.setVolume(0.08f);
+		hallways.setVolume(0.0f);
 		
 		battle = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 2 - Lonely Battle.mp3"));
 		battle.setLooping(true);
-		battle.setVolume(0f);
+		battle.setVolume(0.08f);
+		battle.setVolume(0.0f);
 		
-		towns = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 3 - Lonely Town.mp3"));
+		towns = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 3 - Lonely Town v.2.mp3"));
 		towns.setLooping(true);
-		towns.setVolume(0f);
+		towns.setVolume(0.05f);
+		towns.setVolume(0.0f);
 	}
 
 	@Override
@@ -129,6 +142,7 @@ public class Main extends ApplicationAdapter {
         		creation.stage.draw();
         		if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
         			intro = new Intro();
+        			defineImages();
         			intro2 = new Intro2();
         			location = "intro";
         			hallways.play();
@@ -203,15 +217,18 @@ public class Main extends ApplicationAdapter {
 //        String s = "";
 //        for (Action action : Player.actions)
 //        	s += action.name + " ";
-//        System.out.println (s);
-        		
+//        System.out.println (s);       
+
         batch.end();
+        
 		
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
+		backgroundTexture1.dispose();
+		backgroundTexture2.dispose();
 		creation.stage.dispose();
 		hamlet.stage.dispose();
 	}
@@ -220,11 +237,31 @@ public class Main extends ApplicationAdapter {
         viewport.update(width, height);
     }
 	
+	private void defineImages () {
+		backgroundTexture1 = new Texture(Gdx.files.internal("images/Background.png"));
+		backgroundSprite1 = new Image(backgroundTexture1);
+		backgroundTexture2 = new Texture(Gdx.files.internal("images/Background 2.png"));
+		backgroundSprite2 = new Image(backgroundTexture2);
+		
+		backgroundSprite1.setWidth(SCREEN_WIDTH);
+		backgroundSprite1.setHeight(SCREEN_HEIGHT);
+		
+		backgroundSprite1.setX(SCREEN_WIDTH/2, Align.center);
+		backgroundSprite1.setY(SCREEN_HEIGHT/2, Align.center);
+		
+		backgroundSprite2.setWidth(SCREEN_WIDTH);
+		backgroundSprite2.setHeight(SCREEN_HEIGHT);
+		
+		backgroundSprite2.setX(SCREEN_WIDTH/2, Align.center);
+		backgroundSprite2.setY(SCREEN_HEIGHT/2, Align.center);
+
+	}
+	
 	public void textStage (TextStages textStage) {
 		Gdx.input.setInputProcessor(textStage.stage);
 		textStage.update();
-		textStage.stage.draw();
 		textStage.stage.act();
+		textStage.stage.draw();
 	}
 	public void npc (NPC npc) {
 		Gdx.input.setInputProcessor(npc.stage);

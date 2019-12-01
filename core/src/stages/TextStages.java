@@ -17,17 +17,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 import com.mygdx.game.Main;
 
 public class TextStages {
-	public Stage stage;
+	public final Stage stage;
 	BitmapFont font;
 	TextButton button;
     TextButtonStyle textButtonStyle;
     LabelStyle labelStyle;
     Label text;
+    Label text2;
     ScrollPane scrollPane;
     
     Scanner textReader; // Reads a text file then adds it to readText
@@ -41,7 +43,7 @@ public class TextStages {
     protected static int pindex = 0;
     static float y;
     
-    protected ChoiceButton[] choices;
+    public ChoiceButton[] choices;
     
     boolean flag;
     boolean choosen;
@@ -50,7 +52,10 @@ public class TextStages {
     
 	public TextStages (ChoiceButton[] tchoices, String ttextFile) {		
 		stage = new Stage (Main.viewport);
-				
+			
+		stage.addActor(Main.backgroundSprite2);
+		System.out.println ("AAA" + stage.getActors());
+		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/YeonSung-Regular.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		
@@ -66,6 +71,8 @@ public class TextStages {
 		labelStyle = new LabelStyle();
 						
 		textButtonStyle.font = font;
+		
+		font.setColor(Color.BLACK);
 		labelStyle.font = font;
 		
 		choices = tchoices;
@@ -83,6 +90,17 @@ public class TextStages {
 		textFile = ttextFile;
 		setText();
 		
+		text2 = new Label ("", labelStyle);
+		text2.setColor(Color.BLACK);
+		text2.setY(i + 10, Align.bottomLeft);
+		text2.setX(Align.bottomLeft);
+		text2.setWidth(1880);
+		text2.setWrap(true);
+		stage.addActor(text2);
+		
+		font.setColor(Color.WHITE);
+		labelStyle.font = font;
+		
     	text = new Label ("", labelStyle);
 		text.setY(i + 10, Align.bottomLeft);
 		text.setX(Align.bottomLeft);
@@ -93,7 +111,8 @@ public class TextStages {
 	}
 	
 	// Updates every frame; required since it uses a typewriter effect for text
-	public void update () {	 	
+	public void update () {	 
+				
 		if (Gdx.input.isKeyPressed(Input.Keys.TAB))
 			textSpeed = baseTextSpeed * 6;
 		else
@@ -148,6 +167,11 @@ public class TextStages {
 		
 		if (stringCompleteness > typeText.length())
 			return true;
+		
+		text2.setText(typeText.substring (0, (int)stringCompleteness + 1));
+		text2.invalidate();
+		text2.pack();
+		text2.layout();
 		
 		text.setText(typeText.substring (0, (int)stringCompleteness + 1));
 		text.invalidate();
