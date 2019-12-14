@@ -12,7 +12,7 @@ public class HamletCollectHouse extends NPC {
 	public static boolean spared = false;
 	
 	public HamletCollectHouse(ChoiceButton[][] tchoices) {
-		super(tchoices, "hamlet-collect-house");
+		super(tchoices, "hamlet/hamlet-collect-house");
 		// TODO Auto-generated constructor stub
 	}
 	public HamletCollectHouse() {

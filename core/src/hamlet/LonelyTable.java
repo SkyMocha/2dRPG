@@ -10,7 +10,7 @@ public class LonelyTable extends NPC {
 	public static boolean collectionHouse = false;
 
 	public LonelyTable(ChoiceButton[][] tchoices) {
-		super(tchoices, "lonely-table");
+		super(tchoices, "hamlet/lonely-table");
 	}
 	
 	public LonelyTable () {

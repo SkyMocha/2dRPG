@@ -1,0 +1,9 @@
+(0)You approach the assistant inventor, buried in his research. 
+Although he looks up from his desk, you can tell his mind hasn’t left his research.
+“Ah, greetings.”
+(break)
+(1)We’re currently in desperate need of a specific type of crystals. 
+On the outskirts of this hamlet lies a thicker darkness than in this hamlet. 
+If you can accomplish this, there is a cave where these crystals can be found. 
+We’ll give you the location. Try not to get lost in the darkness. 
+We’ll have rewards should you find yourself successful. 

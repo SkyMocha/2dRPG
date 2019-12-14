@@ -46,7 +46,7 @@ public class TextStages {
     public ChoiceButton[] choices;
     
     boolean flag;
-    boolean choosen;
+    boolean chosen;
     
     String textFile;
     
@@ -113,20 +113,23 @@ public class TextStages {
 	// Updates every frame; required since it uses a typewriter effect for text
 	public void update () {	 
 				
+		for (ChoiceButton choice : choices)
+			choice.update();
+		
 		if (Gdx.input.isKeyPressed(Input.Keys.TAB))
 			textSpeed = baseTextSpeed * 6;
 		else
 			textSpeed = baseTextSpeed;
 		
 		// Checks to see if the text is completed, if not, then it continues drawing the text
-		if (Math.round(stringCompleteness) <= readText.length() && !flag)
+		if (Math.round(stringCompleteness) < readText.length() && !flag)
 			drawText(readText);
 		
 		// Creates the action listeners for the buttons
 		else if (!flag) {
 			// Completes the text just in case
-			stringCompleteness = readText.length()-1;
 			drawText(readText);
+			// Loops through the buttons in choices and adds listeners to the buttons
 			for (j = 0; j < choices.length; j++) {
 				choices[j].index = j;
 				choices[j].button.addListener(new ChangeListener() {
@@ -134,14 +137,17 @@ public class TextStages {
 					@Override
 					public void changed (ChangeEvent event, Actor actor) {
 						decisionTree (index);
-						choosen = !choosen;															
+						chosen = true;
+						// Clears the listener after it was used.
+						choices[j-1].button.clearListeners();
 			    	}
 				});
 			}
 			flag = !flag;
 			stringCompleteness = 0;
 		}
-		if (stringCompleteness + 1 <= readText.length() && choosen)
+		// Runs the decision tree until complete
+		if (stringCompleteness + 1 <= readText.length() && chosen)
 			decisionTree(pindex);
 	}
 	
@@ -165,8 +171,16 @@ public class TextStages {
 				
 		stringCompleteness += textSpeed * Gdx.graphics.getDeltaTime();
 		
-		if (stringCompleteness > typeText.length())
+		if (stringCompleteness > typeText.length()) {
+			if (!typeText.equals(readText))
+				text.setText(typeText);
+			else
+				text.setText(readText);
+			text.invalidate();
+			text.pack();
+			text.layout();
 			return true;
+		}
 		
 		text2.setText(typeText.substring (0, (int)stringCompleteness + 1));
 		text2.invalidate();

@@ -61,7 +61,7 @@ public class LonelyPatron extends NPC {
         		new ChoiceButton ("Leave"),
         	},
       
-        }, "lonely-patron");
+        }, "hamlet/lonely-patron");
     }
 	
 	public void decisionTree (int index) {

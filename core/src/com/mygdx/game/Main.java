@@ -18,19 +18,29 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import dungeonCave.CaveExterior;
+import dungeonCave.CaveInterior;
+import hamlet.AssistantInventor;
 import hamlet.Bartender;
 import hamlet.CollectFight;
+import hamlet.Darkness;
 import hamlet.Hamlet;
 import hamlet.HamletCollectHouse;
 import hamlet.HamletTavern;
+import hamlet.HeadInventor;
 import hamlet.IntroFight;
+import hamlet.Laboratory;
 import hamlet.LightheartedTable;
 import hamlet.LonelyPatron;
 import hamlet.LonelyTable;
+import hamlet.OutgoingStudent;
+import hamlet.QuietStudent;
+import stages.Building;
 import stages.Intro;
 import stages.Intro2;
 import stages.NPC;
 import stages.TextStages;
+import stages.Town;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -62,6 +72,14 @@ public class Main extends ApplicationAdapter {
     public static LonelyTable lonelyTable;
     public static HamletCollectHouse hamletCollectHouse;
     public static CollectFight collectFight;
+    public static Laboratory lab;
+    public static HeadInventor headInventor;
+    public static AssistantInventor assistantInventor;
+    public static OutgoingStudent outgoingStudent;
+    public static QuietStudent quietStudent;
+    public static Darkness darkness;
+    public static CaveExterior caveExterior;
+    public static CaveInterior caveInterior;
     
     // MUSIC FILES
     public static Music hallways;
@@ -106,21 +124,31 @@ public class Main extends ApplicationAdapter {
 		lonelyTable = new LonelyTable();
 		hamletCollectHouse = new HamletCollectHouse();
 		
+		lab = new Laboratory();
+		headInventor = new HeadInventor();
+		assistantInventor = new AssistantInventor ();
+		outgoingStudent = new OutgoingStudent();
+		quietStudent = new QuietStudent();
+		
+		darkness = new Darkness();
+		caveExterior = new CaveExterior();
+		caveInterior = new CaveInterior();
+		
 		// INSTANTIATE AUDIO
 		hallways = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 1 - Lonely Hallway v.2.mp3"));
 		hallways.setLooping(true);
 		hallways.setVolume(0.08f);
-		hallways.setVolume(0.0f);
+//		hallways.setVolume(0.0f);
 		
 		battle = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 2 - Lonely Battle.mp3"));
 		battle.setLooping(true);
 		battle.setVolume(0.08f);
-		battle.setVolume(0.0f);
+//		battle.setVolume(0.0f);
 		
 		towns = Gdx.audio.newMusic(Gdx.files.internal("tracks/Track 3 - Lonely Town v.2.mp3"));
 		towns.setLooping(true);
 		towns.setVolume(0.05f);
-		towns.setVolume(0.0f);
+//		towns.setVolume(0.0f);
 	}
 
 	@Override
@@ -157,12 +185,13 @@ public class Main extends ApplicationAdapter {
         	case "hamlet":
         		hallways.stop();
         		towns.play();
-        		hamlet.update();
         		Gdx.input.setInputProcessor(hamlet.stage);
+        		hamlet.update();
+        		hamlet.stage.act();
         		hamlet.stage.draw();
         		break;
         	case "hamlet-tavern":
-        		textStage (hamletTavern);
+        		building (hamletTavern);
         		break;
         	case "lonely-patron":
         		npc (lonelyPatron, "");
@@ -200,18 +229,43 @@ public class Main extends ApplicationAdapter {
         		}
         		break;
         	case "laboratory":
+        		building(lab);
+        		break;
+        	case "head-inventor":
+        		npc(headInventor);
+        		break;
+        	case "assistant-inventor":
+        		npc(assistantInventor);
+        		break;
+        	case "outgoing-student":
+        		npc(outgoingStudent);
+        		break;
+        	case "quiet-student":
+        		npc(quietStudent);
         		break;
         	case "hamlet-square":
         		break;
         	case "closed-off-fields":
         		break;
         	case "darkness":
+        		building (darkness);
+        		break;
+        	case "darkness-cave":
+        		building (darkness);
+        		break;
+        	case "cave-exterior":
+        		textStage (caveExterior);
+        		break;
+        	case "cave-interior":
+        		textStage (caveInterior);
         		break;
         	case "northern-passage":
         		break;
         	default:
         		break;
         }
+        
+//        System.out.println (location);
         
 //        System.out.println (location);
 //        String s = "";
@@ -221,7 +275,6 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
         
-		
 	}
 	
 	@Override
@@ -266,12 +319,26 @@ public class Main extends ApplicationAdapter {
 	public void npc (NPC npc) {
 		Gdx.input.setInputProcessor(npc.stage);
 		npc.update();
+		npc.stage.act();
 		npc.stage.draw();
 	}
 	public void npc (NPC npc, String s) {
 		Gdx.input.setInputProcessor(npc.stage);
 		npc.update("");
+		npc.stage.act();
 		npc.stage.draw();
+	}
+	public void building (Building b) {
+		Gdx.input.setInputProcessor(b.stage);
+		b.update();
+		b.stage.act();
+		b.stage.draw();
+	}
+	public void town (Town t) {
+		Gdx.input.setInputProcessor(t.stage);
+		t.update();
+		t.stage.act();
+		t.stage.draw();
 	}
 	
 	

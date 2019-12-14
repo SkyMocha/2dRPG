@@ -90,7 +90,8 @@ public class Town {
 	public void update () {
 		updateHelper();
 		int i = 0;
-		for (ChoiceButton choice : locations)
+		for (ChoiceButton choice : locations) {
+			choice.update();
 			if (choice.show) {			
 				choice.button.setX(0, Align.bottomLeft);
 				choice.button.setY(Main.SCREEN_HEIGHT - choice.button.getHeight() - i);
@@ -99,6 +100,7 @@ public class Town {
 			}
 			else
 				choice.button.setVisible(false);
+		}
 	}
 	
 	public void updateHelper() {

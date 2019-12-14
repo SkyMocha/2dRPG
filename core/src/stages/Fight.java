@@ -160,9 +160,10 @@ public abstract class Fight {
 		for (Entity enemy : enemies)
 			enemyHealth += enemy.health + " / " + enemy.maxHealth + "\n"; 
 		info.remove();
-		info = new Label ("HEALTH - " + Player.health + "\nENEMY HEALTHs - " + enemyHealth, labelStyle);
-		info.setX(Main.SCREEN_WIDTH / 2, Align.center);
-		info.setY(Main.SCREEN_HEIGHT / 2, Align.center);
+		info = new Label ("HEALTH - " + Player.health + "\nENEMY HEALTHs: \n" + enemyHealth, labelStyle);
+		info.setX(Main.SCREEN_WIDTH, Align.right);
+		info.setY(Main.SCREEN_HEIGHT / 2, Align.right);
+		info.setAlignment(Align.right);
 		stage.addActor(info);
 		
 		int countDead = 0;

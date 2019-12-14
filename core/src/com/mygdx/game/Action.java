@@ -50,8 +50,9 @@ public class Action {
 			targets[i] = new TextButton (Integer.toString(i+1), textButtonStyle);
 		int i = 0;
 		for (TextButton button : targets) {
-			button.setX(10 + i);
-			i += 50;
+			button.setX(Main.SCREEN_WIDTH/2 + xCircle(100, i));
+			button.setY(Main.SCREEN_HEIGHT/2 + yCircle(100, i));
+			i += 1;
 		}
 		
 		// Defining variables
@@ -59,6 +60,13 @@ public class Action {
 		power = tpower;
 		accuracy = taccuracy;
 		heal = theal;
+	}
+	
+	private int xCircle (int r, int theta) {
+		return (int) (r * Math.sin(theta));
+	}
+	private int yCircle (int r, int theta) {
+		return (int) (r * Math.cos(theta));
 	}
 	
 }

@@ -1,0 +1,27 @@
+"Good evening, sir, welcome to our humble laboratory."
+(break)
+(1)"You seem to not be from here. 
+We seem to be somewhere quite curious, quite curious indeed; 
+at least that's what intuition tells us. More than just intuition- evidence. 
+We have no choice but to make this hamlet our location for a laboratory. 
+We have found ourselves here not of our own free will, it seems, and we must find a way out."
+(break)
+(2)"We believe there to be multiple planes of existence, 
+and we are currently seeking out a way to find them. 
+Something about where we find ourselves does not seem correct."
+(break)
+(3)"And so my intuitions seem true. 
+Something does not seem right?
+We have lived our whole lives here, everything is natural, yet everything is not. 
+Something weighs on our minds. 
+We here, us few in the hamlet, are the only ones who feel as though something is off, 
+and we have been looking for people who think the same. 
+Would you help us in our research?"
+(break)
+“We have a few experiments running, 
+though we are in need of materials. 
+Talk to my assistant, he can inform you on what we need to subsist. 
+We personally cannot leave the lab often as the danger is quite high...  
+you seem,” 
+he takes a short pause before continuing. 
+“fit for the job.”

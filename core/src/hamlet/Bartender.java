@@ -15,7 +15,7 @@ public class Bartender extends NPC {
 	Player player = new Player("");
 	
 	public Bartender(ChoiceButton[] tchoices) {
-		super(tchoices, "hamlet-bartender");
+		super(tchoices, "hamlet/hamlet-bartender");
 	}
 	
 	public Bartender() {

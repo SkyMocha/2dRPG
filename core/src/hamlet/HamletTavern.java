@@ -2,14 +2,15 @@ package hamlet;
 
 import com.mygdx.game.Main;
 
+import stages.Building;
 import stages.ChoiceButton;
 import stages.TextStages;
 import stages.Town;
 
-public class HamletTavern extends TextStages {
+public class HamletTavern extends Building {
 
 	private HamletTavern(ChoiceButton[] t) {
-        super(t, "hamlet-tavern");
+        super(t, "hamlet/hamlet-tavern");
         // continue doing stuff with t here
     }
 
@@ -24,65 +25,28 @@ public class HamletTavern extends TextStages {
         });
     }
     
-    @Override
     public void decisionTree (int index) {
-		pindex = index;
-		System.out.println (pindex);
+    	setText();
+    	
 		switch (index) {
 			case 0:
-				if (drawText("You begin talking to the lonely patron."))
-					try {
-						pindex = -1;
-						Thread.sleep(2000);
-						Main.location = "lonely-patron";
-						setText();
-					} catch(InterruptedException e) {
-					    System.out.println("Thread got interrupted! >:(");
-					}
+				Main.location = "lonely-patron";
 				break;
 			case 1:
-				if (drawText("You step in to interrupt the fight."))
-					try {
-						Main.introFight = new IntroFight();
-						pindex = -1;
-						Thread.sleep(2000);
-						Main.location = "tutorial-fight";
-						setText();
-					} catch(InterruptedException e) {
-					    System.out.println("Thread got interrupted! >:(");
-					}
+				Main.introFight = new IntroFight();
+				Main.location = "tutorial-fight";
 				break;
 			case 2:
-				if (drawText("You sit at the lighthearted table."))
-					try {
-						pindex = -1;
-						Thread.sleep(2000);
-						Main.location = "lighthearted-table";
-						setText();
-					} catch(InterruptedException e) {
-					    System.out.println("Thread got interrupted! >:(");
-					}
+				Main.location = "lighthearted-table";
 				break;
 			case 3:
-				if (drawText("You sit at the lonely table.\nIt seems less lonely than the single stool the lonely patron inhabits,\nMaybe you can get some answers from them."))
-					try {
-						pindex = -1;
-						Thread.sleep(2000);
-						Main.location = "lonely-table";
-						setText();
-					} catch(InterruptedException e) {
-					    System.out.println("Thread got interrupted! >:(");
-					}
+				Main.location = "lonely-table";
 				break;
 			case 4:
-					pindex = -1;
-					Main.location = "hamlet-bartender";
-					setText();
+				Main.location = "hamlet-bartender";
 				break;
 			case 5:
-				pindex = -1;
 				Main.location = "hamlet";
-				setText();
 			default:
 				break;
 		}

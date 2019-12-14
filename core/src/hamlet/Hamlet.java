@@ -33,7 +33,7 @@ public class Hamlet extends Town {
 				Main.location = "hamlet-collection-house";
 				break;
 			case 2:
-				Main.location = "laborotory";
+				Main.location = "laboratory";
 				break;
 			case 3:
 				Main.location = "hamlet-square";

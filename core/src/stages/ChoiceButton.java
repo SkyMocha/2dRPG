@@ -1,17 +1,22 @@
 package stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.reflect.Method;
 import com.mygdx.game.Main;
 import com.mygdx.game.Player;
@@ -27,6 +32,8 @@ public class ChoiceButton {
 	int index;
 	
 	public boolean show = true;
+	
+	private boolean hover;
     
 	public ChoiceButton (final String text) {
 		
@@ -41,6 +48,17 @@ public class ChoiceButton {
 		
 		textButtonStyle.font = font;
 		button = new TextButton(text, textButtonStyle);
+		
+		button.addListener(new ClickListener() {
+			@Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				hover = true;
+            }
+			@Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                hover = false;
+            }
+        });
 	}
 	
 	public ChoiceButton (final String text, boolean tshow) {
@@ -87,6 +105,15 @@ public class ChoiceButton {
 		else if (stat.equals ("image") && req < Player.image)
 			return true;
 		return false;
+	}
+	
+	public void update () {
+		System.out.println (hover);
+		if (!hover)
+			button.getLabel().setColor(Color.WHITE);
+		else {
+			button.getLabel().setColor(1, 0.937f, 0.858f, 1);			
+		}
 	}
 	
 }

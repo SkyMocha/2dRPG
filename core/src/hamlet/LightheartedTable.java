@@ -6,7 +6,7 @@ import stages.NPC;
 public class LightheartedTable extends NPC{
 
 	public LightheartedTable(ChoiceButton[][] tchoices) {
-		super(tchoices, "lonely-table");
+		super(tchoices, "hamlet/lonely-table");
 	}
 	
 	public LightheartedTable () {

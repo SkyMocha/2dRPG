@@ -1,0 +1,5 @@
+(0)Greetings!
+(break)
+(1)Although I would love to talk,
+I am currently in the midst of my research.
+Please talk to the head or assistant inventor.

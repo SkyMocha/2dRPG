@@ -107,6 +107,7 @@ public class NPC {
 				// Sets button position
 				choice.button.setX(Main.SCREEN_WIDTH, Align.bottomRight);
 				choice.button.setY(i);
+				choice.button.align(Align.right);
 				i += 50;
 				
 				// Adds button listener
@@ -264,7 +265,8 @@ public class NPC {
 	public void update () {
 		updateHelper();
 		i = 0;
-		for (ChoiceButton choice : singleChoices)
+		for (ChoiceButton choice : singleChoices) {
+			choice.update();
 			if (choice.show) {
 				choice.button.setX(Main.SCREEN_WIDTH, Align.bottomRight);
 				choice.button.setY(i);
@@ -273,6 +275,7 @@ public class NPC {
 			}
 			else
 				choice.button.setVisible(false);
+		}
 	}
 	
 	public void update (String args) {
@@ -281,6 +284,7 @@ public class NPC {
 		for (ChoiceButton[] choiceList : choices) {
 			i = 0;
 			for (ChoiceButton choice : choiceList) {
+				choice.update();
 				if (choice.show) {
 					choice.button.setX(Main.SCREEN_WIDTH, Align.bottomRight);
 					choice.button.setY(i);
@@ -300,6 +304,7 @@ public class NPC {
 			if (choice.show) {
 				choice.button.setX(Main.SCREEN_WIDTH, Align.bottomRight);
 				choice.button.setY(i);
+				choice.button.getLabel().setAlignment(Align.right);
 				stage.addActor(choice.button);
 				i += 50;
 			}
