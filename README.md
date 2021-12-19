@@ -12,7 +12,8 @@ An overview of both prototypes as well as video demos & screenshots can be found
 ## Current functionality
 * Character creation & stats
 * Different areas
-* Music
+* Music (First attempt at ever making music for a game)
+* Backgrounds & backdrops made in Photoshop
 * Combat
 * Obtaining (but not using) items
 * Quests
